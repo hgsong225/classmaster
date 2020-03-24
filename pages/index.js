@@ -262,19 +262,42 @@ export default function home (props) {
                       if (course.class_id === selectedCourseId) {
                         return (
                           <Row className="detail-box">
-                              <Col sm={12}>과목: {course.class_name}</Col>
-                              <Col sm={12}>시간: {course.day}</Col>
-                              <Col sm={12}>이름: {course.professor}</Col>
-                              <Col sm={12}>메일: {course.email}</Col>
-                              <Col sm={12}>
-                                <a
-                                  href={course.homepage}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  >
-                                  홈페이지
-                                </a>
-                              </Col>
+                            <Col sm={2} className="margin-btm-lg">
+                              과목
+                            </Col>
+                            <Col sm={10} className="margin-btm-lg">
+                              {course.class_name}
+                            </Col>
+                            <Col sm={2} className="margin-btm-lg">
+                              시간
+                            </Col>
+                            <Col sm={10} className="margin-btm-lg">
+                              {course.day}
+                            </Col>
+                            <Col sm={2} className="margin-btm-lg">
+                              교수님
+                            </Col>
+                            <Col sm={10} className="margin-btm-lg">
+                              {course.professor}
+                            </Col>
+                            <Col sm={2} className="margin-btm-lg">
+                              메일
+                            </Col>
+                            <Col sm={10} className="margin-btm-lg">
+                              {course.email}
+                            </Col>
+                            <Col sm={2} className="margin-btm-lg">
+                              링크
+                            </Col>
+                            <Col sm={10} className="margin-btm-lg">
+                              <a
+                                href={course.homepage}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                >
+                                <strong>홈페이지</strong>
+                              </a>
+                            </Col>
                           </Row>
                           )
                         }
