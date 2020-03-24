@@ -10,7 +10,7 @@ import moment from 'moment'
 moment.locale('ko')
 
 /* Configures */
-import firebase from '../config/firebase'
+import firebase from '../configure/firebase'
 const arrayRemove = firebase.firestore.FieldValue.arrayRemove;
 const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 
