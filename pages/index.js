@@ -137,12 +137,12 @@ export default function home (props) {
       <main>
         <Container fluid>
           <Row>
-            <Col sm={12} className="today">
+            <Col md={12} className="today">
               <h1>
                 {moment().format('YYYY년 MMMM Do dddd')} - <span style={{color: "#1a73e8"}}>2주차</span>
               </h1>
             </Col>
-            <Col sm={4} className="left-bar">
+            <Col md={4} className="left-bar">
               <ul className="list-unstyled">
                 <li className="semester">
                   <p>2020-1학기</p>
@@ -244,12 +244,12 @@ export default function home (props) {
                 </Form>
               </Modal>
             </Col>
-            <Col sm={8} className="row-centering" id="right-view-alt">
+            <Col md={8} className="row-centering" id="right-view-alt">
               <Row>
                 <p>과목을 선택하세요.</p>
               </Row>
             </Col>
-            <Col sm={8} className="right-view" id="right-view">
+            <Col md={8} className="right-view" id="right-view">
               <Row className="course-container">
                 <Col sm={12}>
                   <Row>
@@ -261,44 +261,54 @@ export default function home (props) {
                     courses.map(course => {
                       if (course.class_id === selectedCourseId) {
                         return (
-                          <Row className="detail-box">
-                            <Col sm={2} className="margin-btm-lg">
-                              과목
-                            </Col>
-                            <Col sm={10} className="margin-btm-lg">
-                              {course.class_name}
-                            </Col>
-                            <Col sm={2} className="margin-btm-lg">
-                              시간
-                            </Col>
-                            <Col sm={10} className="margin-btm-lg">
-                              {course.day}
-                            </Col>
-                            <Col sm={2} className="margin-btm-lg">
-                              교수님
-                            </Col>
-                            <Col sm={10} className="margin-btm-lg">
-                              {course.professor}
-                            </Col>
-                            <Col sm={2} className="margin-btm-lg">
-                              메일
-                            </Col>
-                            <Col sm={10} className="margin-btm-lg">
-                              {course.email}
-                            </Col>
-                            <Col sm={2} className="margin-btm-lg">
-                              링크
-                            </Col>
-                            <Col sm={10} className="margin-btm-lg">
-                              <a
-                                href={course.homepage}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                >
-                                <strong>홈페이지</strong>
-                              </a>
-                            </Col>
-                          </Row>
+                          <div className="detail-box">
+                            <Row className="margin-top-btm-md">
+                              <Col md={2} className="word ">
+                                과목
+                              </Col>
+                              <Col md={10} className="">
+                                {course.class_name}
+                              </Col>
+                            </Row>
+                            <Row className="margin-top-btm-md">
+                              <Col md={2} className="word ">
+                                시간
+                              </Col>
+                              <Col md={10} className="">
+                                {course.day}
+                              </Col>
+                            </Row>
+                            <Row className="margin-top-btm-md">
+                              <Col md={2} className="word ">
+                                교수님
+                              </Col>
+                              <Col md={10} className="">
+                                {course.professor}
+                              </Col>
+                            </Row>
+                            <Row className="margin-top-btm-md">
+                              <Col md={2} className="word ">
+                                메일
+                              </Col>
+                              <Col md={10} className="">
+                                {course.email}
+                              </Col>
+                            </Row>
+                            <Row className="margin-top-btm-md">
+                              <Col md={2} className="word ">
+                                링크
+                              </Col>
+                              <Col md={10} className="">
+                                <a
+                                  href={course.homepage}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  >
+                                  <strong>홈페이지</strong>
+                                </a>
+                              </Col>
+                            </Row>
+                          </div>
                           )
                         }
                       })
@@ -306,42 +316,50 @@ export default function home (props) {
                 </Col>
               </Row>
               <Row className="assignment-container">
-                <Col>
+                <Col sm={12}>
                   <Row>
                     <Col sm={12} className="dash">
                         <h3>과제</h3>
                     </Col>
-                    <Col sm={12} className="margin-top-btm-lg row-start">
+                    <Col sm={12} className="margin-top-btm-md row-start">
                       <Button variant="outline-primary" onClick={handleShowAssignment}>과제추가</Button>
                     </Col>
                   </Row>
                   {
                     assignments.length && assignments.map(assignment => (
-                      <Row className="detail-box margin-btm-lg">
-                        <Col sm={12}>
-                          <h4>
-                            {assignment.weeks}주차
-                          </h4>
-                        </Col>
-                        <Col sm={2}>
-                          기한
-                        </Col>
-                        <Col sm={10}>
-                          {assignment.deadline}
-                        </Col>
-                        <Col sm={2}>
-                          중요
-                        </Col>
-                        <Col sm={10}>
-                          {assignment.note}
-                        </Col>
-                        <Col sm={2}>
-                          내용
-                        </Col>
-                        <Col sm={10}>
-                          {assignment.text}
-                        </Col>
-                      </Row>
+                      <div className="detail-box margin-top-btm-lg">
+                        <Row>
+                          <Col md={12}>
+                            <h4>
+                              {assignment.weeks}주차
+                            </h4>
+                          </Col>
+                        </Row>
+                        <Row  className="margin-top-btm-md">
+                          <Col md={2} className="word ">
+                            기한
+                          </Col>
+                          <Col md={10} className="">
+                            {assignment.deadline}
+                          </Col>
+                        </Row>
+                        <Row  className="margin-top-btm-md">
+                          <Col md={2} className="word ">
+                            중요
+                          </Col>
+                          <Col md={10} className="">
+                            {assignment.note}
+                          </Col>
+                        </Row>
+                        <Row  className="margin-top-btm-md">
+                          <Col md={2} className="word ">
+                            내용
+                          </Col>
+                          <Col md={10} className="">
+                            {assignment.text}
+                          </Col>
+                        </Row>
+                      </div>
                     ))
                   }
                 </Col>
