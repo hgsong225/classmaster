@@ -405,7 +405,7 @@ export default function home (props) {
                               중요
                             </Col>
                             <Col md={10} className="">
-                              {assignment.note}
+                              <p>{assignment.note}</p>
                             </Col>
                           </Row>
                           <Row  className="margin-top-btm-md">

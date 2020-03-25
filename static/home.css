@@ -48,6 +48,7 @@
 .detail-box {
     margin-top: 1rem;
     border-bottom: 1px solid #ececec;
+    word-wrap: break-word;
 }
 
 .word {
