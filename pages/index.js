@@ -18,9 +18,9 @@ const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 import NavigationBar from '../components/NavigationBar'
 
 /* Styles */
+import 'bootstrap/dist/css/bootstrap.min.css'
 import '../static/root.css'
 import '../static/home.css'
-
 
 export default function home (props) {
   const router = useRouter();
@@ -32,6 +32,7 @@ export default function home (props) {
   const [ assignments, setAssignment ] = useState({})
   const [ showCourse, setShowCourse ] = useState(false)
   const [ showAssignment, setShowAssignment ] = useState(false)
+  const [ showAssignmentEdit, setShowAssignmentEdit ] = useState(false)
   const [ courseInformation, setCourseInformation ] = useState({
     class_name: '',
     day: '',
@@ -45,13 +46,44 @@ export default function home (props) {
     deadline: null,
     note: null,
     text: null,
-    weeks: null,
+    weeks: 1,
   })
 
-  const handleCloseCourse = () => setShowCourse(false);
-  const handleShowCourse = () => setShowCourse(true);
-  const handleCloseAssignment = () => setShowAssignment(false);
-  const handleShowAssignment = () => setShowAssignment(true);
+  const handleShowCourse = () => setShowCourse(true)
+  const handleCloseCourse = () => setShowCourse(false)
+  const handleShowAssignment = () => setShowAssignment(true)
+  const handleCloseAssignment = () => setShowAssignment(false)
+  const handleShowAssignmentEdit = () => {
+    setShowAssignmentEdit(true)
+    let assignment_deletes = document.getElementsByClassName("assignment-delete");
+    Array.prototype.forEach.call(assignment_deletes, element => {
+      element.style.display = "block"
+    })
+    let edit_button = document.getElementById("assignment-edit")
+    edit_button.style.display = "none"
+    
+    let complete_button = document.getElementById("assignment-complete")
+    complete_button.style.display = "block"
+  }
+  const handleCloseAssignmentEdit = () => {
+    setShowAssignmentEdit(false)
+    let assignment_deletes = document.getElementsByClassName("assignment-delete");
+    Array.prototype.forEach.call(assignment_deletes, element => {
+      element.style.display = "none"
+    })
+    let edit_button = document.getElementById("assignment-edit")
+    edit_button.style.display = "block"
+    
+    let complete_button = document.getElementById("assignment-complete")
+    complete_button.style.display = "none"
+  }
+
+  const deleteAssignment = (evt) => {
+    evt.preventDefault();
+    const selectedAssignmentId = evt.target.id
+    db.collection('class').doc(`${selectedCourseId}`).collection('assignment').doc(`${selectedAssignmentId}`)
+    .delete()
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -60,27 +92,27 @@ export default function home (props) {
         setAssignment(data.docs.map(doc => ({ ...doc.data(), id: doc.id })))
       })
 
-      let right_view_alt = document.getElementById("right-view-alt");
-      let right_view = document.getElementById("right-view");
-      if (selectedCourseId === null) {
-        right_view_alt.style.display = "block";
-        right_view.style.display = "none";
-      } else {
-        right_view_alt.style.display = "none";
-        right_view.style.display = "block";
-      }
+    }
+    let right_view_alt = document.getElementById("right-view-alt");
+    let right_view = document.getElementById("right-view");
+    if (selectedCourseId === null) {
+      right_view_alt.style.display = "block";
+      right_view.style.display = "none";
+    } else {
+      right_view_alt.style.display = "none";
+      right_view.style.display = "block";
     }
     
-
     fetchData();
-  }, [assignments])
+  }, [selectedCourseId])
 
   const selectCourse = (evt) => {
     evt.preventDefault();
     // const value = evt.target.getAttribute('value');
 
-    setSelectCourseId(evt.target.getAttribute('value'));
-    setSelectCourse(evt.target.getAttribute('name'));
+    setSelectCourseId(evt.target.getAttribute('value'))
+    setSelectCourse(evt.target.getAttribute('name'))
+    handleCloseAssignmentEdit(false)
   }
 
   const handleChange = evt => {
@@ -90,16 +122,25 @@ export default function home (props) {
     let newCourse = {
       [formName]: value,
     };
-    
+
     if (showCourse) setCourseInformation(Object.assign(courseInformation, newCourse))
     if (showAssignment) setAssignmentInformation(Object.assign(assignmentInformation, newCourse))
   }
 
   const addCourse = () => {
+    console.log(assignmentInformation)
     db.collection('class')
     .add(courseInformation)
     .then(res => {
-      setCourseInformation({});
+      setCourseInformation({
+        class_name: '',
+        day: '',
+        email: '',
+        homepage: '',
+        professor: '',
+        semester: '2020-1',
+        uuid: '',
+      });
       handleCloseCourse();
       router.push('/');
     })
@@ -110,9 +151,13 @@ export default function home (props) {
     db.collection('class').doc(`${selectedCourseId}`).collection('assignment')
     .add(assignmentInformation)
     .then(res => {
-      setAssignmentInformation({});
+      setAssignmentInformation({
+        deadline: null,
+        note: null,
+        text: null,
+        weeks: 1,
+      });
       handleCloseAssignment();
-      router.push('/');
     })
     .catch(err => console.log(err));
   }
@@ -141,6 +186,7 @@ export default function home (props) {
             content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
           />
           <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap" rel="stylesheet"></link>
+          <script src="https://kit.fontawesome.com/8cf5b2f14d.js" crossorigin="anonymous"></script>
         </Head>
         <main>
           <Container fluid>
@@ -152,6 +198,9 @@ export default function home (props) {
               </Col>
               <Col md={4} className="left-bar">
                 <ul className="list-unstyled">
+                  <li className="tool-box">
+                    <span className="tool">추가</span>
+                  </li>
                   <li className="semester">
                     <p>2020-1학기</p>
                   </li>
@@ -261,8 +310,8 @@ export default function home (props) {
                 <Row className="course-container">
                   <Col sm={12}>
                     <Row>
-                      <Col sm={12} className="dash">
-                        <h3>과목 정보</h3>
+                      <Col sm={12} className="content-header dash">
+                        <div className="h3">과목 정보</div>
                       </Col>
                     </Row>
                     {
@@ -326,11 +375,13 @@ export default function home (props) {
                 <Row className="assignment-container">
                   <Col sm={12}>
                     <Row>
-                      <Col sm={12} className="dash">
-                          <h3>과제</h3>
+                      <Col sm={12} className="content-header dash">
+                          <div className="h3">과제</div>
                       </Col>
-                      <Col sm={12} className="margin-top-btm-md row-start">
-                        <Button variant="outline-primary" onClick={handleShowAssignment}>과제추가</Button>
+                      <Col sm={12} className="tool-box row-start">
+                        <div className="tool" onClick={handleShowAssignment}><span>추가</span></div>
+                        <div className="tool" id="assignment-edit" onClick={handleShowAssignmentEdit}><span>수정</span></div>
+                        <div className="tool" id="assignment-complete" onClick={handleCloseAssignmentEdit}><span>완료</span></div>
                       </Col>
                     </Row>
                     {
@@ -338,9 +389,10 @@ export default function home (props) {
                         <div className="detail-box margin-top-btm-lg">
                           <Row>
                             <Col md={12}>
-                              <h4>
-                                {assignment.weeks}주차
-                              </h4>
+                              <div className="h4">{assignment.weeks}주차</div>
+                              <div className="assignment-delete tool">
+                                <span id={assignment.id} onClick={deleteAssignment}>삭제</span>
+                              </div>
                             </Col>
                           </Row>
                           <Row  className="margin-top-btm-md">

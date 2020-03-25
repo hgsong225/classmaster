@@ -53,3 +53,49 @@
 .word {
     color: rgba(0,0,0,.65);
 }
+
+.content-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+}
+
+.close:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+.fa-ellipsis-h, .tool-box {
+    cursor: pointer;
+    color: grey;
+    margin-top: 0.5rem;
+}
+
+.fa-ellipsis-h:hover, .tool:hover {
+    color: #000;
+}
+
+.tool-box {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 14px;
+}
+
+.tool {
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.assignment-delete {
+    display: none;
+}
+
+#assignment-complete {
+    display: none;
+}
