@@ -14,6 +14,13 @@ import firebase from '../configure/firebase'
 const arrayRemove = firebase.firestore.FieldValue.arrayRemove;
 const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 
+/* Components */
+import NavigationBar from '../components/NavigationBar'
+
+/* Styles */
+import '../static/root.css'
+import '../static/home.css'
+
 
 export default function home (props) {
   const router = useRouter();
@@ -125,6 +132,7 @@ export default function home (props) {
   
   return (
     <div className="theme-background">
+      <NavigationBar />
       <div className="container fluid">
         <Head>
           <title>classmaster | 클래스마스터 | 사이드 프로젝트 커뮤니티 - 킥사</title>
@@ -134,7 +142,6 @@ export default function home (props) {
           />
           <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap" rel="stylesheet"></link>
         </Head>
-
         <main>
           <Container fluid>
             <Row>
