@@ -27,6 +27,7 @@ export default function home (props) {
   const db = firebase.firestore();
   const courses = props.data.courses;
 
+  const [ semester, setSemester ] = useState("2020-1")
   const [ selectedCourseId, setSelectCourseId ] = useState(null)
   const [ selectedCourse, setSelectCourse ] = useState(null)
   const [ assignments, setAssignment ] = useState({})
@@ -110,8 +111,9 @@ export default function home (props) {
     evt.preventDefault();
     // const value = evt.target.getAttribute('value');
 
-    setSelectCourseId(evt.target.getAttribute('value'))
+    setSelectCourseId(evt.target.getAttribute('id'))
     setSelectCourse(evt.target.getAttribute('name'))
+    setSemester(evt.target.getAttribute('value'))
     handleCloseAssignmentEdit(false)
   }
 
@@ -174,7 +176,7 @@ export default function home (props) {
 
     return options;
   }
-  
+
   return (
     <div className="theme-background">
       <NavigationBar />
@@ -201,30 +203,38 @@ export default function home (props) {
                   <li className="tool-box">
                     <span className="tool"  onClick={handleShowCourse}>과목 추가</span>
                   </li>
-                  <li className="semester">
-                    <p>2020-1학기</p>
-                  </li>
-                {
-                  courses.map(course => {
-                    if (course.class_id === selectedCourseId) {
+                  {
+                    courses.map(classes => {
                       return (
-                        <li key={course.class_id}>
-                            <p className="pointer" name={course.class_name} value={course.class_id} onClick={selectCourse}>
-                              <strong>{course.class_name}</strong>
-                            </p>
-                        </li>
+                        <div>
+                          <li className="semester">
+                            <p>{classes[0]}</p>
+                          </li>
+                          {
+                            classes[1].map(course => {
+                              if (course.class_id === selectedCourseId) {
+                                return (
+                                  <li key={course.class_id}>
+                                      <p className="pointer" name={course.class_name} id={course.class_id} value={classes[0]} onClick={selectCourse}>
+                                        <strong>{course.class_name}</strong>
+                                      </p>
+                                  </li>
+                                )
+                              } else {
+                                return (
+                                  <li key={course.class_id}>
+                                      <p className="pointer" name={course.class_name} id={course.class_id} value={classes[0]} onClick={selectCourse}>
+                                        {course.class_name}
+                                      </p>
+                                  </li>
+                                )
+                              }
+                            })
+                          }
+                        </div>
                       )
-                    } else {
-                      return (
-                        <li key={course.class_id}>
-                            <p className="pointer" name={course.class_name} value={course.class_id} onClick={selectCourse}>
-                              {course.class_name}
-                            </p>
-                        </li>
-                      )
-                    }
-                  })
-                }
+                    })
+                  }
                 </ul>
                 <Modal show={showCourse} onHide={handleCloseCourse}>
                   <Form>
@@ -312,60 +322,64 @@ export default function home (props) {
                       </Col>
                     </Row>
                     {
-                      courses.map(course => {
-                        if (course.class_id === selectedCourseId) {
-                          return (
-                            <div className="detail-box">
-                              <Row className="margin-top-btm-md">
-                                <Col md={2} className="word ">
-                                  과목
-                                </Col>
-                                <Col md={10} className="">
-                                  {course.class_name}
-                                </Col>
-                              </Row>
-                              <Row className="margin-top-btm-md">
-                                <Col md={2} className="word ">
-                                  시간
-                                </Col>
-                                <Col md={10} className="">
-                                  {course.day}
-                                </Col>
-                              </Row>
-                              <Row className="margin-top-btm-md">
-                                <Col md={2} className="word ">
-                                  교수님
-                                </Col>
-                                <Col md={10} className="">
-                                  {course.professor}
-                                </Col>
-                              </Row>
-                              <Row className="margin-top-btm-md">
-                                <Col md={2} className="word ">
-                                  메일
-                                </Col>
-                                <Col md={10} className="">
-                                  {course.email}
-                                </Col>
-                              </Row>
-                              <Row className="margin-top-btm-md">
-                                <Col md={2} className="word ">
-                                  링크
-                                </Col>
-                                <Col md={10} className="">
-                                  <a
-                                    href={course.homepage}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    >
-                                    <strong>홈페이지</strong>
-                                  </a>
-                                </Col>
-                              </Row>
-                            </div>
-                            )
-                          }
-                        })
+                      courses.map(classes => {
+                        return (
+                          classes[1].map(course => {
+                            if (course.class_id === selectedCourseId) {
+                              return (
+                                <div className="detail-box">
+                                  <Row className="margin-top-btm-md">
+                                    <Col md={2} className="word ">
+                                      과목
+                                    </Col>
+                                    <Col md={10} className="">
+                                      {course.class_name}
+                                    </Col>
+                                  </Row>
+                                  <Row className="margin-top-btm-md">
+                                    <Col md={2} className="word ">
+                                      시간
+                                    </Col>
+                                    <Col md={10} className="">
+                                      {course.day}
+                                    </Col>
+                                  </Row>
+                                  <Row className="margin-top-btm-md">
+                                    <Col md={2} className="word ">
+                                      교수님
+                                    </Col>
+                                    <Col md={10} className="">
+                                      {course.professor}
+                                    </Col>
+                                  </Row>
+                                  <Row className="margin-top-btm-md">
+                                    <Col md={2} className="word ">
+                                      메일
+                                    </Col>
+                                    <Col md={10} className="">
+                                      {course.email}
+                                    </Col>
+                                  </Row>
+                                  <Row className="margin-top-btm-md">
+                                    <Col md={2} className="word ">
+                                      링크
+                                    </Col>
+                                    <Col md={10} className="">
+                                      <a
+                                        href={course.homepage}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        >
+                                        <strong>홈페이지</strong>
+                                      </a>
+                                    </Col>
+                                  </Row>
+                                </div>
+                              )
+                            }
+                          })
+                        )
+                      })
                     }
                   </Col>
                 </Row>
@@ -555,13 +569,44 @@ home.getInitialProps = async ({query}) => {
     let data = [];
     db.collection('class').orderBy('class_name', 'asc')
     .get()
-    .then(docs => {
-      docs.forEach(doc => {
+    .then(async docs => {
+      await docs.forEach(doc => {
         data.push(Object.assign({
             class_id: doc.id,
         }, doc.data()))
       })
-      resolve(data);
+      let result = await data.reduce((total, {
+        class_id,
+        class_name,
+        day,
+        email,
+        homepage,
+        professor,
+        semester,
+        uuid,
+        ...data
+      }) => {
+          if(!total[semester]) {
+              total[semester] = [];
+          }
+
+          total[semester].push({
+            class_id,
+            class_name,
+            day,
+            email,
+            homepage,
+            professor,
+            semester,
+            uuid,
+          })
+          
+          return total;
+      }, [])
+
+      let resultArr = Object.entries(result);
+
+      resolve(resultArr);
     })
     .catch(err => reject([]));
   })
