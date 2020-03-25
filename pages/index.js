@@ -199,7 +199,7 @@ export default function home (props) {
               <Col md={4} className="left-bar">
                 <ul className="list-unstyled">
                   <li className="tool-box">
-                    <span className="tool">추가</span>
+                    <span className="tool"  onClick={handleShowCourse}>과목 추가</span>
                   </li>
                   <li className="semester">
                     <p>2020-1학기</p>
@@ -225,9 +225,6 @@ export default function home (props) {
                     }
                   })
                 }
-                  <li>
-                    <Button variant="outline-primary" onClick={handleShowCourse}>과목추가</Button>
-                  </li>
                 </ul>
                 <Modal show={showCourse} onHide={handleCloseCourse}>
                   <Form>

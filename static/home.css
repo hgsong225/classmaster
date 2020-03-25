@@ -78,7 +78,7 @@
 }
 
 .fa-ellipsis-h:hover, .tool:hover {
-    color: #000;
+    color: #1a73e8;
 }
 
 .tool-box {
@@ -90,10 +90,15 @@
 .tool {
     margin-right: 1rem;
     cursor: pointer;
+    color: grey;
 }
 
 .assignment-delete {
     display: none;
+}
+
+.assignment-delete:hover {
+    color: #e91e63;
 }
 
 #assignment-complete {
