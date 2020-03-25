@@ -36,7 +36,7 @@ export default function NavigationBar (props) {
                     </Nav>
                     <Nav>
                         <Link href='/' passHref>
-                            <Nav.Link>로그인</Nav.Link>
+                            <Nav.Link></Nav.Link>
                         </Link>
                     </Nav>
                 </Navbar.Collapse>

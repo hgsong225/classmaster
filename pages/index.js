@@ -192,9 +192,9 @@ export default function home (props) {
           <Container fluid>
             <Row>
               <Col md={12} className="today">
-                <h1>
-                  {moment().format('YYYY년 MMMM Do dddd')} - <span style={{color: "#1a73e8"}}>2주차</span>
-                </h1>
+                <div className="h1" style={{color: "#1a73e8"}}>
+                  {moment().format('YYYY년 MMMM Do dddd')}<span style={{color: "#1a73e8"}}></span>
+                </div>
               </Col>
               <Col md={4} className="left-bar">
                 <ul className="list-unstyled">
