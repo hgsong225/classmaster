@@ -31,8 +31,16 @@ body {
     color: #1a1a1a;
 }
 
-.right-vew {
+.right-view {
     padding: 1rem;
+}
+
+.course-container, .assignment-container {
+    background-color: #fff;
+}
+
+.theme-background {
+    background-color: #f7f7f7
 }
 
 .course-container, .assignment-container {

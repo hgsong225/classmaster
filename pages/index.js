@@ -124,365 +124,367 @@ export default function home (props) {
   }
   
   return (
-    <div className="container">
-      <Head>
-        <title>classmaster | 클래스마스터 | 사이드 프로젝트 커뮤니티 - 킥사</title>
-        <meta 
-          name='viewport'
-          content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
-        />
-        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap" rel="stylesheet"></link>
-      </Head>
+    <div className="theme-background">
+      <div className="container fluid">
+        <Head>
+          <title>classmaster | 클래스마스터 | 사이드 프로젝트 커뮤니티 - 킥사</title>
+          <meta 
+            name='viewport'
+            content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
+          />
+          <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap" rel="stylesheet"></link>
+        </Head>
 
-      <main>
-        <Container fluid>
-          <Row>
-            <Col md={12} className="today">
-              <h1>
-                {moment().format('YYYY년 MMMM Do dddd')} - <span style={{color: "#1a73e8"}}>2주차</span>
-              </h1>
-            </Col>
-            <Col md={4} className="left-bar">
-              <ul className="list-unstyled">
-                <li className="semester">
-                  <p>2020-1학기</p>
-                </li>
-              {
-                courses.map(course => {
-                  if (course.class_id === selectedCourseId) {
-                    return (
-                      <li key={course.class_id}>
-                          <p className="pointer" name={course.class_name} value={course.class_id} onClick={selectCourse}>
-                            <strong>{course.class_name}</strong>
-                          </p>
-                      </li>
-                    )
-                  } else {
-                    return (
-                      <li key={course.class_id}>
-                          <p className="pointer" name={course.class_name} value={course.class_id} onClick={selectCourse}>
-                            {course.class_name}
-                          </p>
-                      </li>
-                    )
-                  }
-                })
-              }
-                <li>
-                  <Button variant="outline-primary" onClick={handleShowCourse}>과목추가</Button>
-                </li>
-              </ul>
-              <Modal show={showCourse} onHide={handleCloseCourse}>
-                <Form>
-                  <Modal.Header closeButton>
-                    <Modal.Title>과목 추가</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <Form.Group as={Row} controlId="formPlaintext">
-                      <Form.Label column sm="2">
-                        학기
-                      </Form.Label>
-                      <Col sm="10">
-                        <Form.Control name="semester" readOnly defaultValue="2020-1학기" />
+        <main>
+          <Container fluid>
+            <Row>
+              <Col md={12} className="today">
+                <h1>
+                  {moment().format('YYYY년 MMMM Do dddd')} - <span style={{color: "#1a73e8"}}>2주차</span>
+                </h1>
+              </Col>
+              <Col md={4} className="left-bar">
+                <ul className="list-unstyled">
+                  <li className="semester">
+                    <p>2020-1학기</p>
+                  </li>
+                {
+                  courses.map(course => {
+                    if (course.class_id === selectedCourseId) {
+                      return (
+                        <li key={course.class_id}>
+                            <p className="pointer" name={course.class_name} value={course.class_id} onClick={selectCourse}>
+                              <strong>{course.class_name}</strong>
+                            </p>
+                        </li>
+                      )
+                    } else {
+                      return (
+                        <li key={course.class_id}>
+                            <p className="pointer" name={course.class_name} value={course.class_id} onClick={selectCourse}>
+                              {course.class_name}
+                            </p>
+                        </li>
+                      )
+                    }
+                  })
+                }
+                  <li>
+                    <Button variant="outline-primary" onClick={handleShowCourse}>과목추가</Button>
+                  </li>
+                </ul>
+                <Modal show={showCourse} onHide={handleCloseCourse}>
+                  <Form>
+                    <Modal.Header closeButton>
+                      <Modal.Title>과목 추가</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <Form.Group as={Row} controlId="formPlaintext">
+                        <Form.Label column sm="2">
+                          학기
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control name="semester" readOnly defaultValue="2020-1학기" />
+                        </Col>
+                      </Form.Group>
+
+                      <Form.Group as={Row} controlId="formPlaintext">
+                        <Form.Label column sm="2">
+                          과목명
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control name="class_name" placeholder="경영학원론" onChange={handleChange} />
+                        </Col>
+                      </Form.Group>
+
+                      <Form.Group as={Row} controlId="formPlaintext">
+                        <Form.Label column sm="2">
+                          요일
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control name="day" placeholder="예시) 월 9시~12시" onChange={handleChange}/>
+                        </Col>
+                      </Form.Group>
+
+                      <Form.Group as={Row} controlId="formPlaintext">
+                        <Form.Label column sm="2">
+                          교수님
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control name="professor" type="text" placeholder="홍길동" onChange={handleChange}/>
+                        </Col>
+                      </Form.Group>
+
+                      <Form.Group as={Row} controlId="formPlaintext">
+                        <Form.Label column sm="2">
+                          Email
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control name="email" type="email" placeholder="email" controlId="formPlaintextEmail" onChange={handleChange}/>
+                        </Col>
+                      </Form.Group>
+
+                      <Form.Group as={Row} controlId="formPlaintext">
+                        <Form.Label column sm="2">
+                          page
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control name="homepage" type="email" placeholder="참고 홈페이지" controlId="formPlaintext" onChange={handleChange}/>
+                        </Col>
+                      </Form.Group>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" type="reset" onClick={handleCloseCourse}>
+                        취소
+                      </Button>
+                      <Button variant="primary" onClick={addCourse}>
+                        추가
+                      </Button>
+                    </Modal.Footer>
+                  </Form>
+                </Modal>
+              </Col>
+              <Col md={8} className="row-centering" id="right-view-alt">
+                <Row>
+                  <p>과목을 선택하세요.</p>
+                </Row>
+              </Col>
+              <Col md={8} className="right-view" id="right-view">
+                <Row className="course-container">
+                  <Col sm={12}>
+                    <Row>
+                      <Col sm={12} className="dash">
+                        <h3>과목 정보</h3>
                       </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} controlId="formPlaintext">
-                      <Form.Label column sm="2">
-                        과목명
-                      </Form.Label>
-                      <Col sm="10">
-                        <Form.Control name="class_name" placeholder="경영학원론" onChange={handleChange} />
-                      </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} controlId="formPlaintext">
-                      <Form.Label column sm="2">
-                        요일
-                      </Form.Label>
-                      <Col sm="10">
-                        <Form.Control name="day" placeholder="예시) 월 9시~12시" onChange={handleChange}/>
-                      </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} controlId="formPlaintext">
-                      <Form.Label column sm="2">
-                        교수님
-                      </Form.Label>
-                      <Col sm="10">
-                        <Form.Control name="professor" type="text" placeholder="홍길동" onChange={handleChange}/>
-                      </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} controlId="formPlaintext">
-                      <Form.Label column sm="2">
-                        Email
-                      </Form.Label>
-                      <Col sm="10">
-                        <Form.Control name="email" type="email" placeholder="email" controlId="formPlaintextEmail" onChange={handleChange}/>
-                      </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} controlId="formPlaintext">
-                      <Form.Label column sm="2">
-                        page
-                      </Form.Label>
-                      <Col sm="10">
-                        <Form.Control name="homepage" type="email" placeholder="참고 홈페이지" controlId="formPlaintext" onChange={handleChange}/>
-                      </Col>
-                    </Form.Group>
-
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" type="reset" onClick={handleCloseCourse}>
-                      취소
-                    </Button>
-                    <Button variant="primary" onClick={addCourse}>
-                      추가
-                    </Button>
-                  </Modal.Footer>
-                </Form>
-              </Modal>
-            </Col>
-            <Col md={8} className="row-centering" id="right-view-alt">
-              <Row>
-                <p>과목을 선택하세요.</p>
-              </Row>
-            </Col>
-            <Col md={8} className="right-view" id="right-view">
-              <Row className="course-container">
-                <Col sm={12}>
-                  <Row>
-                    <Col sm={12} className="dash">
-                      <h3>과목 정보</h3>
-                    </Col>
-                  </Row>
-                  {
-                    courses.map(course => {
-                      if (course.class_id === selectedCourseId) {
-                        return (
-                          <div className="detail-box">
-                            <Row className="margin-top-btm-md">
-                              <Col md={2} className="word ">
-                                과목
-                              </Col>
-                              <Col md={10} className="">
-                                {course.class_name}
-                              </Col>
-                            </Row>
-                            <Row className="margin-top-btm-md">
-                              <Col md={2} className="word ">
-                                시간
-                              </Col>
-                              <Col md={10} className="">
-                                {course.day}
-                              </Col>
-                            </Row>
-                            <Row className="margin-top-btm-md">
-                              <Col md={2} className="word ">
-                                교수님
-                              </Col>
-                              <Col md={10} className="">
-                                {course.professor}
-                              </Col>
-                            </Row>
-                            <Row className="margin-top-btm-md">
-                              <Col md={2} className="word ">
-                                메일
-                              </Col>
-                              <Col md={10} className="">
-                                {course.email}
-                              </Col>
-                            </Row>
-                            <Row className="margin-top-btm-md">
-                              <Col md={2} className="word ">
-                                링크
-                              </Col>
-                              <Col md={10} className="">
-                                <a
-                                  href={course.homepage}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  >
-                                  <strong>홈페이지</strong>
-                                </a>
-                              </Col>
-                            </Row>
-                          </div>
-                          )
-                        }
-                      })
-                  }
-                </Col>
-              </Row>
-              <Row className="assignment-container">
-                <Col sm={12}>
-                  <Row>
-                    <Col sm={12} className="dash">
-                        <h3>과제</h3>
-                    </Col>
-                    <Col sm={12} className="margin-top-btm-md row-start">
-                      <Button variant="outline-primary" onClick={handleShowAssignment}>과제추가</Button>
-                    </Col>
-                  </Row>
-                  {
-                    assignments.length && assignments.map(assignment => (
-                      <div className="detail-box margin-top-btm-lg">
-                        <Row>
-                          <Col md={12}>
-                            <h4>
-                              {assignment.weeks}주차
-                            </h4>
-                          </Col>
-                        </Row>
-                        <Row  className="margin-top-btm-md">
-                          <Col md={2} className="word ">
-                            기한
-                          </Col>
-                          <Col md={10} className="">
-                            {assignment.deadline}
-                          </Col>
-                        </Row>
-                        <Row  className="margin-top-btm-md">
-                          <Col md={2} className="word ">
-                            중요
-                          </Col>
-                          <Col md={10} className="">
-                            {assignment.note}
-                          </Col>
-                        </Row>
-                        <Row  className="margin-top-btm-md">
-                          <Col md={2} className="word ">
-                            내용
-                          </Col>
-                          <Col md={10} className="">
-                            {assignment.text}
-                          </Col>
-                        </Row>
-                      </div>
-                    ))
-                  }
-                </Col>
-              </Row>
-              <Modal show={showAssignment} onHide={handleCloseAssignment}>
-                <Form>
-                  <Modal.Header closeButton>
-                    <Modal.Title>{selectedCourse} - 과제 추가</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <Form.Group as={Row} controlId="formPlaintext">
-                      <Form.Label column sm="2">
-                        주차
-                      </Form.Label>
-                      <Col sm="10">
-                        <Form.Control name="weeks" as="select" type="number" defaultValue="1" onChange={handleChange}>
-                          {
-                            createOptions()
+                    </Row>
+                    {
+                      courses.map(course => {
+                        if (course.class_id === selectedCourseId) {
+                          return (
+                            <div className="detail-box">
+                              <Row className="margin-top-btm-md">
+                                <Col md={2} className="word ">
+                                  과목
+                                </Col>
+                                <Col md={10} className="">
+                                  {course.class_name}
+                                </Col>
+                              </Row>
+                              <Row className="margin-top-btm-md">
+                                <Col md={2} className="word ">
+                                  시간
+                                </Col>
+                                <Col md={10} className="">
+                                  {course.day}
+                                </Col>
+                              </Row>
+                              <Row className="margin-top-btm-md">
+                                <Col md={2} className="word ">
+                                  교수님
+                                </Col>
+                                <Col md={10} className="">
+                                  {course.professor}
+                                </Col>
+                              </Row>
+                              <Row className="margin-top-btm-md">
+                                <Col md={2} className="word ">
+                                  메일
+                                </Col>
+                                <Col md={10} className="">
+                                  {course.email}
+                                </Col>
+                              </Row>
+                              <Row className="margin-top-btm-md">
+                                <Col md={2} className="word ">
+                                  링크
+                                </Col>
+                                <Col md={10} className="">
+                                  <a
+                                    href={course.homepage}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    >
+                                    <strong>홈페이지</strong>
+                                  </a>
+                                </Col>
+                              </Row>
+                            </div>
+                            )
                           }
-                        </Form.Control>
+                        })
+                    }
+                  </Col>
+                </Row>
+                <Row className="assignment-container">
+                  <Col sm={12}>
+                    <Row>
+                      <Col sm={12} className="dash">
+                          <h3>과제</h3>
                       </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} controlId="formPlaintext">
-                      <Form.Label column sm="2">
-                        기한
-                      </Form.Label>
-                      <Col sm="10">
-                        <Form.Control name="deadline" placeholder="제출 기한" onChange={handleChange} />
+                      <Col sm={12} className="margin-top-btm-md row-start">
+                        <Button variant="outline-primary" onClick={handleShowAssignment}>과제추가</Button>
                       </Col>
-                    </Form.Group>
+                    </Row>
+                    {
+                      assignments.length && assignments.map(assignment => (
+                        <div className="detail-box margin-top-btm-lg">
+                          <Row>
+                            <Col md={12}>
+                              <h4>
+                                {assignment.weeks}주차
+                              </h4>
+                            </Col>
+                          </Row>
+                          <Row  className="margin-top-btm-md">
+                            <Col md={2} className="word ">
+                              기한
+                            </Col>
+                            <Col md={10} className="">
+                              {assignment.deadline}
+                            </Col>
+                          </Row>
+                          <Row  className="margin-top-btm-md">
+                            <Col md={2} className="word ">
+                              중요
+                            </Col>
+                            <Col md={10} className="">
+                              {assignment.note}
+                            </Col>
+                          </Row>
+                          <Row  className="margin-top-btm-md">
+                            <Col md={2} className="word ">
+                              내용
+                            </Col>
+                            <Col md={10} className="">
+                              {assignment.text}
+                            </Col>
+                          </Row>
+                        </div>
+                      ))
+                    }
+                  </Col>
+                </Row>
+                <Modal show={showAssignment} onHide={handleCloseAssignment}>
+                  <Form>
+                    <Modal.Header closeButton>
+                      <Modal.Title>{selectedCourse} - 과제 추가</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <Form.Group as={Row} controlId="formPlaintext">
+                        <Form.Label column sm="2">
+                          주차
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control name="weeks" as="select" type="number" defaultValue="1" onChange={handleChange}>
+                            {
+                              createOptions()
+                            }
+                          </Form.Control>
+                        </Col>
+                      </Form.Group>
 
-                    <Form.Group as={Row} controlId="formPlaintext">
-                      <Form.Label column sm="2">
-                        중요
-                      </Form.Label>
-                      <Col sm="10">
-                        <Form.Control name="note" placeholder="교수님이 짚어주신 포인트" onChange={handleChange}/>
-                      </Col>
-                    </Form.Group>
+                      <Form.Group as={Row} controlId="formPlaintext">
+                        <Form.Label column sm="2">
+                          기한
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control name="deadline" placeholder="제출 기한" onChange={handleChange} />
+                        </Col>
+                      </Form.Group>
 
-                    <Form.Group as={Row} controlId="formPlaintext">
-                      <Form.Label column sm="2">
-                        과제
-                      </Form.Label>
-                      <Col sm="10">
-                        <Form.Control name="text" type="text" placeholder="Chapter 1~2 요약하기" onChange={handleChange}/>
-                      </Col>
-                    </Form.Group>
+                      <Form.Group as={Row} controlId="formPlaintext">
+                        <Form.Label column sm="2">
+                          중요
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control name="note" placeholder="교수님이 짚어주신 포인트" onChange={handleChange}/>
+                        </Col>
+                      </Form.Group>
 
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" type="reset" onClick={handleCloseAssignment}>
-                      취소
-                    </Button>
-                    <Button variant="primary" onClick={addAssignment}>
-                      추가
-                    </Button>
-                  </Modal.Footer>
-                </Form>
-              </Modal>
-            </Col>
-          </Row>
-        </Container>
-      </main>
+                      <Form.Group as={Row} controlId="formPlaintext">
+                        <Form.Label column sm="2">
+                          과제
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control name="text" type="text" placeholder="Chapter 1~2 요약하기" onChange={handleChange}/>
+                        </Col>
+                      </Form.Group>
 
-      <footer>
-        <a
-          href=""
-          target="_blank"
-          rel="noopener noreferrer"
-          >
-          MVP 사이드 프로젝트 커뮤니티 - 킥보드 만드는 사람들
-        </a>
-      </footer>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" type="reset" onClick={handleCloseAssignment}>
+                        취소
+                      </Button>
+                      <Button variant="primary" onClick={addAssignment}>
+                        추가
+                      </Button>
+                    </Modal.Footer>
+                  </Form>
+                </Modal>
+              </Col>
+            </Row>
+          </Container>
+        </main>
 
-      <style jsx>{`
-        .container {
-            min-height: 100vh;
-            padding: 0 0.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        <footer>
+          <a
+            href=""
+            target="_blank"
+            rel="noopener noreferrer"
+            >
+            MVP 사이드 프로젝트 커뮤니티 - 킥보드 만드는 사람들
+          </a>
+        </footer>
+
+        <style jsx>{`
+          .container {
+              min-height: 100vh;
+              padding: 0 0.5rem;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+          }
+
+          .pointer {
+            cursor: pointer;
         }
 
-        .pointer {
-          cursor: pointer;
-      }
+          main {
+              width: 100%;
+              padding: 5rem 0;
+              flex: 1;
 
-        main {
-            width: 100%;
-            padding: 5rem 0;
-            flex: 1;
+          }
 
-        }
+          footer {
+              width: 100%;
+              height: 100px;
+              border-top: 1px solid #eaeaea;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+          }
 
-        footer {
-            width: 100%;
-            height: 100px;
-            border-top: 1px solid #eaeaea;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+          footer img {
+              margin-left: 0.5rem;
+          }
 
-        footer img {
-            margin-left: 0.5rem;
-        }
+          footer a {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+          }
 
-        footer a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+          a {
+              color: inherit;
+              text-decoration: none;
+          }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+          `}</style>
 
-        `}</style>
-
+      </div>
     </div>
 
   );
