@@ -105,3 +105,16 @@
 #assignment-complete {
     display: none;
 }
+
+.left-bar div li div {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.left-bar div li div p {
+    margin-right: 1rem;
+}
+
+.delete-course {
+    cursor: pointer;
+}

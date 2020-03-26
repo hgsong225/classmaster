@@ -25,8 +25,9 @@ import '../static/home.css'
 export default function home (props) {
   const router = useRouter();
   const db = firebase.firestore();
-  const courses = props.data.courses;
-
+  
+  const [ coursesData, setCourses ] = useState([])
+  const courses = coursesData;
   const [ semester, setSemester ] = useState("2020-1")
   const [ selectedCourseId, setSelectCourseId ] = useState(null)
   const [ selectedCourse, setSelectCourse ] = useState(null)
@@ -79,6 +80,13 @@ export default function home (props) {
     complete_button.style.display = "none"
   }
 
+  const deleteCourse = (evt) => {
+    evt.preventDefault();
+    let course_id = evt.target.id;
+    db.collection('class').doc(`${course_id}`)
+    .delete()
+  }
+
   const deleteAssignment = (evt) => {
     evt.preventDefault();
     const selectedAssignmentId = evt.target.id
@@ -88,6 +96,48 @@ export default function home (props) {
 
   useEffect(() => {
     async function fetchData() {
+        db.collection('class').orderBy('class_name', 'asc')
+        .onSnapshot(async docs => {
+          let data = [];
+          await docs.forEach(doc => {
+            data.push(Object.assign({
+                class_id: doc.id,
+            }, doc.data()))
+          })
+          let result = data.reduce((total, {
+            class_id,
+            class_name,
+            day,
+            email,
+            homepage,
+            professor,
+            semester,
+            uuid,
+            ...data
+          }) => {
+              if(!total[semester]) {
+                  total[semester] = [];
+              }
+    
+              total[semester].push({
+                class_id,
+                class_name,
+                day,
+                email,
+                homepage,
+                professor,
+                semester,
+                uuid,
+              })
+              
+              return total;
+          }, [])
+    
+          let resultArr = Object.entries(result);
+          setCourses(resultArr);
+        })
+
+
       await db.collection('class').doc(`${selectedCourseId}`).collection('assignment').orderBy('weeks', 'desc')
       .onSnapshot(async data => {
         setAssignment(data.docs.map(doc => ({ ...doc.data(), id: doc.id })))
@@ -130,7 +180,6 @@ export default function home (props) {
   }
 
   const addCourse = () => {
-    console.log(assignmentInformation)
     db.collection('class')
     .add(courseInformation)
     .then(res => {
@@ -202,6 +251,7 @@ export default function home (props) {
                 <ul className="list-unstyled">
                   <li className="tool-box">
                     <span className="tool"  onClick={handleShowCourse}>과목 추가</span>
+                    <span className="tool"  onClick={handleShowCourse}>관리</span>
                   </li>
                   {
                     courses.map(classes => {
@@ -215,17 +265,23 @@ export default function home (props) {
                               if (course.class_id === selectedCourseId) {
                                 return (
                                   <li key={course.class_id}>
+                                    <div>
                                       <p className="pointer" name={course.class_name} id={course.class_id} value={classes[0]} onClick={selectCourse}>
                                         <strong>{course.class_name}</strong>
                                       </p>
+                                      <p id={course.class_id} className="delete-course" onClick={deleteCourse}>삭제</p>
+                                    </div>
                                   </li>
                                 )
                               } else {
                                 return (
                                   <li key={course.class_id}>
+                                    <div>
                                       <p className="pointer" name={course.class_name} id={course.class_id} value={classes[0]} onClick={selectCourse}>
                                         {course.class_name}
                                       </p>
+                                      <p id={course.class_id} className="delete-course" onClick={deleteCourse}>삭제</p>
+                                    </div>
                                   </li>
                                 )
                               }
