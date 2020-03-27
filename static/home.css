@@ -115,6 +115,12 @@
     margin-right: 1rem;
 }
 
-.delete-course {
+.course-delete {
+    display: none;
     cursor: pointer;
+}
+
+.active {
+    color: #000;
+    font-weight: 600;
 }

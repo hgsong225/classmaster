@@ -33,6 +33,7 @@ export default function home (props) {
   const [ selectedCourse, setSelectCourse ] = useState(null)
   const [ assignments, setAssignment ] = useState({})
   const [ showCourse, setShowCourse ] = useState(false)
+  const [ showCourseEdit, setShowCourseEdit ] = useState(false)
   const [ showAssignment, setShowAssignment ] = useState(false)
   const [ showAssignmentEdit, setShowAssignmentEdit ] = useState(false)
   const [ courseInformation, setCourseInformation ] = useState({
@@ -53,6 +54,28 @@ export default function home (props) {
 
   const handleShowCourse = () => setShowCourse(true)
   const handleCloseCourse = () => setShowCourse(false)
+  const handleCourseEdit = () => {
+    let course_setting = document.getElementsByClassName("course-setting");
+    if (course_setting[0].className.split(' ').indexOf('active') === -1)
+    {
+      setShowCourseEdit(true)
+      course_setting[0].className += " active";
+  
+      let course_deletes = document.getElementsByClassName("course-delete");
+      Array.prototype.forEach.call(course_deletes, element => {
+        element.style.display = "block"
+      })
+    } else {
+      setShowCourseEdit(false)
+      course_setting[0].className = course_setting[0].className.replace(" active", "");
+  
+      let course_deletes = document.getElementsByClassName("course-delete");
+      Array.prototype.forEach.call(course_deletes, element => {
+        element.style.display = "none"
+      })
+    }
+  }
+  
   const handleShowAssignment = () => setShowAssignment(true)
   const handleCloseAssignment = () => setShowAssignment(false)
   const handleShowAssignmentEdit = () => {
@@ -250,8 +273,8 @@ export default function home (props) {
               <Col md={4} className="left-bar">
                 <ul className="list-unstyled">
                   <li className="tool-box">
-                    <span className="tool"  onClick={handleShowCourse}>과목 추가</span>
-                    <span className="tool"  onClick={handleShowCourse}>관리</span>
+                    <span className="tool course-add" onClick={handleShowCourse}>과목 추가</span>
+                    <span className="tool course-setting" onClick={handleCourseEdit}>관리</span>
                   </li>
                   {
                     courses.map(classes => {
@@ -269,7 +292,7 @@ export default function home (props) {
                                       <p className="pointer" name={course.class_name} id={course.class_id} value={classes[0]} onClick={selectCourse}>
                                         <strong>{course.class_name}</strong>
                                       </p>
-                                      <p id={course.class_id} className="delete-course" onClick={deleteCourse}>삭제</p>
+                                      <p id={course.class_id} className="course-delete" onClick={deleteCourse}>삭제</p>
                                     </div>
                                   </li>
                                 )
@@ -280,7 +303,7 @@ export default function home (props) {
                                       <p className="pointer" name={course.class_name} id={course.class_id} value={classes[0]} onClick={selectCourse}>
                                         {course.class_name}
                                       </p>
-                                      <p id={course.class_id} className="delete-course" onClick={deleteCourse}>삭제</p>
+                                      <p id={course.class_id} className="course-delete" onClick={deleteCourse}>삭제</p>
                                     </div>
                                   </li>
                                 )
