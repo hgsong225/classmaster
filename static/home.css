@@ -124,3 +124,7 @@
     color: #000;
     font-weight: 600;
 }
+
+.course-edit-cancel {
+    display: none;
+}

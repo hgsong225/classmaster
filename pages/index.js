@@ -33,6 +33,7 @@ export default function home (props) {
   const [ selectedCourse, setSelectCourse ] = useState(null)
   const [ assignments, setAssignment ] = useState({})
   const [ showCourse, setShowCourse ] = useState(false)
+  const [ showCourseDelete, setShowCourseDelete ] = useState(false)
   const [ showCourseEdit, setShowCourseEdit ] = useState(false)
   const [ showAssignment, setShowAssignment ] = useState(false)
   const [ showAssignmentEdit, setShowAssignmentEdit ] = useState(false)
@@ -55,10 +56,14 @@ export default function home (props) {
   const handleShowCourse = () => setShowCourse(true)
   const handleCloseCourse = () => setShowCourse(false)
   const handleCourseEdit = () => {
+    if (showCourseEdit === false) setShowCourseEdit(true)
+    if (showCourseEdit === true) setShowCourseEdit(false)
+  }
+  const handleCourseDelete = () => {
     let course_setting = document.getElementsByClassName("course-setting");
     if (course_setting[0].className.split(' ').indexOf('active') === -1)
     {
-      setShowCourseEdit(true)
+      setShowCourseDelete(true)
       course_setting[0].className += " active";
   
       let course_deletes = document.getElementsByClassName("course-delete");
@@ -66,7 +71,7 @@ export default function home (props) {
         element.style.display = "block"
       })
     } else {
-      setShowCourseEdit(false)
+      setShowCourseDelete(false)
       course_setting[0].className = course_setting[0].className.replace(" active", "");
   
       let course_deletes = document.getElementsByClassName("course-delete");
@@ -176,9 +181,22 @@ export default function home (props) {
       right_view_alt.style.display = "none";
       right_view.style.display = "block";
     }
+
+    const course_edit = document.getElementsByClassName('course-edit');
+    const course_edit_cancel = document.getElementsByClassName('course-edit-cancel');
+    if (showCourseEdit === true) {
+      course_edit_cancel[0].style.display = 'block'
+      course_edit[0].className += " active"
+      course_edit[0].getElementsByTagName("span")[0].innerHTML = '완료'
+    }
+    if (showCourseEdit === false) {
+      course_edit_cancel[0].style.display = 'none'
+      course_edit[0].className = course_edit[0].className.replace(" active", "")
+      course_edit[0].getElementsByTagName("span")[0].innerHTML = '수정'
+    }
     
     fetchData();
-  }, [selectedCourseId])
+  }, [selectedCourseId, showCourseEdit])
 
   const selectCourse = (evt) => {
     evt.preventDefault();
@@ -274,7 +292,7 @@ export default function home (props) {
                 <ul className="list-unstyled">
                   <li className="tool-box">
                     <span className="tool course-add" onClick={handleShowCourse}>과목 추가</span>
-                    <span className="tool course-setting" onClick={handleCourseEdit}>관리</span>
+                    <span className="tool course-setting" onClick={handleCourseDelete}>관리</span>
                   </li>
                   {
                     courses.map(classes => {
@@ -398,6 +416,10 @@ export default function home (props) {
                     <Row>
                       <Col sm={12} className="content-header dash">
                         <div className="h3">과목 정보</div>
+                      </Col>
+                      <Col sm={12} className="tool-box row-start">
+                        <div className="tool course-edit-cancel" value="cancel"><span>취소</span></div>
+                        <div className="tool course-edit" value="edit" onClick={handleCourseEdit}><span>수정</span></div>
                       </Col>
                     </Row>
                     {
