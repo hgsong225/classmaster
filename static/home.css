@@ -128,3 +128,10 @@
 .course-edit-cancel {
     display: none;
 }
+.complete {
+    color: #1a73e8;
+}
+
+.complete:hover {
+    font-weight: 600;
+}

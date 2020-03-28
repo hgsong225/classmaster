@@ -186,12 +186,12 @@ export default function home (props) {
     const course_edit_cancel = document.getElementsByClassName('course-edit-cancel');
     if (showCourseEdit === true) {
       course_edit_cancel[0].style.display = 'block'
-      course_edit[0].className += " active"
+      course_edit[0].className += " complete"
       course_edit[0].getElementsByTagName("span")[0].innerHTML = '완료'
     }
     if (showCourseEdit === false) {
       course_edit_cancel[0].style.display = 'none'
-      course_edit[0].className = course_edit[0].className.replace(" active", "")
+      course_edit[0].className = course_edit[0].className.replace(" complete", "")
       course_edit[0].getElementsByTagName("span")[0].innerHTML = '수정'
     }
     
