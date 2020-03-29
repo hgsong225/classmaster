@@ -330,7 +330,7 @@ export default function home (props) {
               <Col md={4} className="left-bar">
                 <ul className="list-unstyled">
                   <li className="tool-box">
-                    <span className="tool course-add" onClick={handleShowCourse}>과목 추가</span>
+                    <span className="tool course-add" onClick={handleShowCourse}>강의 추가</span>
                     <span className="tool course-setting" onClick={handleCourseDelete}>관리</span>
                   </li>
                   {
@@ -375,7 +375,7 @@ export default function home (props) {
                 <Modal show={showCourse} onHide={handleCloseCourse}>
                   <Form>
                     <Modal.Header closeButton>
-                      <Modal.Title>과목 추가</Modal.Title>
+                      <Modal.Title>강의 추가</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <Form.Group as={Row} controlId="formPlaintext">
@@ -454,7 +454,7 @@ export default function home (props) {
                   <Col sm={12}>
                     <Row>
                       <Col sm={12} className="content-header dash">
-                        <div className="h3">과목 정보</div>
+                        <div className="h3">강의 정보</div>
                       </Col>
                       <Col sm={12} className="tool-box row-start">
                         <div className="tool course-edit-cancel" value="cancel" onClick={handleCourseEditCancel}><span>취소</span></div>
@@ -478,7 +478,7 @@ export default function home (props) {
                                   </Row>
                                   <Row className="margin-top-btm-md">
                                     <Col md={2} className="word ">
-                                      <span>과목</span>
+                                      <span>강의</span>
                                     </Col>
                                     <Col md={10} className="course-readonly ">
                                       {course.class_name}
