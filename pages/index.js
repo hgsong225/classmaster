@@ -540,7 +540,7 @@ export default function home (props) {
                       </Col>
                       <Col sm={12} className="tool-box row-start">
                         <div className="tool" onClick={handleShowAssignment}><span>추가</span></div>
-                        <div className="tool" id="assignment-edit" onClick={handleShowAssignmentEdit}><span>수정</span></div>
+                        <div className="tool" id="assignment-edit" onClick={handleShowAssignmentEdit}><span>선택</span></div>
                         <div className="tool" id="assignment-complete" onClick={handleCloseAssignmentEdit}><span>완료</span></div>
                       </Col>
                     </Row>
