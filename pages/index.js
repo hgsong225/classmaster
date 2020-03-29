@@ -30,11 +30,21 @@ export default function home (props) {
   const courses = coursesData;
   const [ semester, setSemester ] = useState("2020-1")
   const [ selectedCourseId, setSelectCourseId ] = useState(null)
-  const [ selectedCourse, setSelectCourse ] = useState(null)
+  const [ selectedCourse, setSelectCourse ] = useState({})
   const [ assignments, setAssignment ] = useState({})
+
   const [ showCourse, setShowCourse ] = useState(false)
-  const [ showCourseDelete, setShowCourseDelete ] = useState(false)
   const [ showCourseEdit, setShowCourseEdit ] = useState(false)
+  const [ willUpdateCourse, setEditCourse ] = useState({
+    class_name: '',
+    day: '',
+    email: '',
+    homepage: '',
+    professor: '',
+    semester: '2020-1',
+  })
+  const [ showCourseDelete, setShowCourseDelete ] = useState(false)
+  
   const [ showAssignment, setShowAssignment ] = useState(false)
   const [ showAssignmentEdit, setShowAssignmentEdit ] = useState(false)
   const [ courseInformation, setCourseInformation ] = useState({
@@ -59,6 +69,7 @@ export default function home (props) {
     if (showCourseEdit === false) setShowCourseEdit(true)
     if (showCourseEdit === true) setShowCourseEdit(false)
   }
+  const handleCourseEditCancel = () => setShowCourseEdit(false)
   const handleCourseDelete = () => {
     let course_setting = document.getElementsByClassName("course-setting");
     if (course_setting[0].className.split(' ').indexOf('active') === -1)
@@ -171,6 +182,7 @@ export default function home (props) {
         setAssignment(data.docs.map(doc => ({ ...doc.data(), id: doc.id })))
       })
 
+
     }
     let right_view_alt = document.getElementById("right-view-alt");
     let right_view = document.getElementById("right-view");
@@ -186,13 +198,11 @@ export default function home (props) {
     const course_edit_cancel = document.getElementsByClassName('course-edit-cancel');
     if (showCourseEdit === true) {
       course_edit_cancel[0].style.display = 'block'
-      course_edit[0].className += " complete"
-      course_edit[0].getElementsByTagName("span")[0].innerHTML = '완료'
+      course_edit[0].style.display = 'none'
     }
     if (showCourseEdit === false) {
       course_edit_cancel[0].style.display = 'none'
-      course_edit[0].className = course_edit[0].className.replace(" complete", "")
-      course_edit[0].getElementsByTagName("span")[0].innerHTML = '수정'
+      course_edit[0].style.display = 'block'
     }
     
     fetchData();
@@ -200,24 +210,41 @@ export default function home (props) {
 
   const selectCourse = (evt) => {
     evt.preventDefault();
-    // const value = evt.target.getAttribute('value');
+    let id = evt.target.getAttribute('id')
+    let name = evt.target.getAttribute('name')
+    let value = evt.target.getAttribute('value')
 
-    setSelectCourseId(evt.target.getAttribute('id'))
-    setSelectCourse(evt.target.getAttribute('name'))
-    setSemester(evt.target.getAttribute('value'))
+    db.collection('class').doc(`${id}`)
+      .get()
+      .then(async doc => {
+        await setSelectCourse(Object.assign({
+          class_id: doc.id,
+        }, doc.data()))
+        
+        await setEditCourse(Object.assign({
+          class_id: doc.id,
+        }, doc.data()))
+      })
+
+    setSelectCourseId(id)
+    setSemester(value)
     handleCloseAssignmentEdit(false)
+    setShowCourseEdit(false)
   }
 
   const handleChange = evt => {
     const formName = evt.target.name;
     const value = evt.target.value;
 
-    let newCourse = {
+    let newData = {
       [formName]: value,
     };
 
-    if (showCourse) setCourseInformation(Object.assign(courseInformation, newCourse))
-    if (showAssignment) setAssignmentInformation(Object.assign(assignmentInformation, newCourse))
+    console.log(newData);
+    setValue(value);
+    if (showCourseEdit) setEditCourse(Object.assign(willUpdateCourse, newData))
+    if (showCourse) setCourseInformation(Object.assign(courseInformation, newData))
+    if (showAssignment) setAssignmentInformation(Object.assign(assignmentInformation, newData))
   }
 
   const addCourse = () => {
@@ -252,6 +279,18 @@ export default function home (props) {
       handleCloseAssignment();
     })
     .catch(err => console.log(err));
+  }
+
+  const updateCourse = () => {
+    db.collection('class').doc(`${selectedCourseId}`)
+    .update(willUpdateCourse)
+    .then(res => setShowCourseEdit(false))
+  }
+
+  const updateAssignment = () => {
+    db.collection('class').doc(`${selectedCourseId}`).collection('assignment').doc('과제 id')
+    .update(willUpdateCourse)
+    .then(res => setShowCourseEdit(false))
   }
 
   const createOptions = () => {
@@ -418,7 +457,7 @@ export default function home (props) {
                         <div className="h3">과목 정보</div>
                       </Col>
                       <Col sm={12} className="tool-box row-start">
-                        <div className="tool course-edit-cancel" value="cancel"><span>취소</span></div>
+                        <div className="tool course-edit-cancel" value="cancel" onClick={handleCourseEditCancel}><span>취소</span></div>
                         <div className="tool course-edit" value="edit" onClick={handleCourseEdit}><span>수정</span></div>
                       </Col>
                     </Row>
@@ -430,42 +469,51 @@ export default function home (props) {
                               return (
                                 <div className="detail-box">
                                   <Row className="margin-top-btm-md">
-                                    <Col md={2} className="word ">
-                                      과목
+                                    <Col md={2} className="word row-start">
+                                      <span>학기</span>
                                     </Col>
-                                    <Col md={10} className="">
+                                    <Col md={10} className="row-start">
+                                      <span>{course.semester}</span>
+                                    </Col>
+                                  </Row>
+                                  <Row className="margin-top-btm-md">
+                                    <Col md={2} className="word row-start">
+                                      <span>과목</span>
+                                    </Col>
+                                    <Col md={10} className="course-readonly row-start">
                                       {course.class_name}
+                                      <span></span>
                                     </Col>
                                   </Row>
                                   <Row className="margin-top-btm-md">
-                                    <Col md={2} className="word ">
-                                      시간
+                                    <Col md={2} className="word row-start">
+                                      <span>시간</span>
                                     </Col>
-                                    <Col md={10} className="">
-                                      {course.day}
-                                    </Col>
-                                  </Row>
-                                  <Row className="margin-top-btm-md">
-                                    <Col md={2} className="word ">
-                                      교수님
-                                    </Col>
-                                    <Col md={10} className="">
-                                      {course.professor}
+                                    <Col md={10} className="course-readonly row-start">
+                                      <span>{course.day}</span>
                                     </Col>
                                   </Row>
                                   <Row className="margin-top-btm-md">
-                                    <Col md={2} className="word ">
-                                      메일
+                                    <Col md={2} className="word row-start">
+                                      <span>교수님</span>
                                     </Col>
-                                    <Col md={10} className="">
-                                      {course.email}
+                                    <Col md={10} className="course-readonly row-start">
+                                      <span>{course.professor}</span>
                                     </Col>
                                   </Row>
                                   <Row className="margin-top-btm-md">
-                                    <Col md={2} className="word ">
-                                      링크
+                                    <Col md={2} className="word row-start">
+                                      <span>메일</span>
                                     </Col>
-                                    <Col md={10} className="">
+                                    <Col md={10} className="course-readonly row-start">
+                                      <span>{course.email}</span>
+                                    </Col>
+                                  </Row>
+                                  <Row className="margin-top-btm-md">
+                                    <Col md={2} className="word row-start">
+                                      <span>링크</span>
+                                    </Col>
+                                    <Col md={10} className="row-start">
                                       <a
                                         href={course.homepage}
                                         target="_blank"
@@ -507,28 +555,28 @@ export default function home (props) {
                               </div>
                             </Col>
                           </Row>
-                          <Row  className="margin-top-btm-md">
-                            <Col md={2} className="word ">
-                              기한
+                          <Row className="margin-top-btm-md">
+                            <Col md={2} className="word row-start">
+                              <span>기한</span>
                             </Col>
-                            <Col md={10} className="">
-                              {assignment.deadline}
-                            </Col>
-                          </Row>
-                          <Row  className="margin-top-btm-md">
-                            <Col md={2} className="word ">
-                              중요
-                            </Col>
-                            <Col md={10} className="">
-                              <p>{assignment.note}</p>
+                            <Col md={10} className="row-start">
+                              <span>{assignment.deadline}</span>
                             </Col>
                           </Row>
-                          <Row  className="margin-top-btm-md">
-                            <Col md={2} className="word ">
-                              내용
+                          <Row className="margin-top-btm-md">
+                            <Col md={2} className="word row-start">
+                              <span>중요</span>
                             </Col>
-                            <Col md={10} className="">
-                              {assignment.text}
+                            <Col md={10} className="row-start">
+                              <span>{assignment.note}</span>
+                            </Col>
+                          </Row>
+                          <Row className="margin-top-btm-md">
+                            <Col md={2} className="word row-start">
+                              <span>내용</span>
+                            </Col>
+                            <Col md={10} className="row-start">
+                              <span>{assignment.text}</span>
                             </Col>
                           </Row>
                         </div>
@@ -539,7 +587,7 @@ export default function home (props) {
                 <Modal show={showAssignment} onHide={handleCloseAssignment}>
                   <Form>
                     <Modal.Header closeButton>
-                      <Modal.Title>{selectedCourse} - 과제 추가</Modal.Title>
+                      <Modal.Title>{selectedCourse.class_name} - 과제 추가</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <Form.Group as={Row} controlId="formPlaintext">
