@@ -469,51 +469,51 @@ export default function home (props) {
                               return (
                                 <div className="detail-box">
                                   <Row className="margin-top-btm-md">
-                                    <Col md={2} className="word row-start">
+                                    <Col md={2} className="word ">
                                       <span>학기</span>
                                     </Col>
-                                    <Col md={10} className="row-start">
+                                    <Col md={10} className="">
                                       <span>{course.semester}</span>
                                     </Col>
                                   </Row>
                                   <Row className="margin-top-btm-md">
-                                    <Col md={2} className="word row-start">
+                                    <Col md={2} className="word ">
                                       <span>과목</span>
                                     </Col>
-                                    <Col md={10} className="course-readonly row-start">
+                                    <Col md={10} className="course-readonly ">
                                       {course.class_name}
                                       <span></span>
                                     </Col>
                                   </Row>
                                   <Row className="margin-top-btm-md">
-                                    <Col md={2} className="word row-start">
+                                    <Col md={2} className="word ">
                                       <span>시간</span>
                                     </Col>
-                                    <Col md={10} className="course-readonly row-start">
+                                    <Col md={10} className="course-readonly ">
                                       <span>{course.day}</span>
                                     </Col>
                                   </Row>
                                   <Row className="margin-top-btm-md">
-                                    <Col md={2} className="word row-start">
+                                    <Col md={2} className="word ">
                                       <span>교수님</span>
                                     </Col>
-                                    <Col md={10} className="course-readonly row-start">
+                                    <Col md={10} className="course-readonly ">
                                       <span>{course.professor}</span>
                                     </Col>
                                   </Row>
                                   <Row className="margin-top-btm-md">
-                                    <Col md={2} className="word row-start">
+                                    <Col md={2} className="word ">
                                       <span>메일</span>
                                     </Col>
-                                    <Col md={10} className="course-readonly row-start">
+                                    <Col md={10} className="course-readonly ">
                                       <span>{course.email}</span>
                                     </Col>
                                   </Row>
                                   <Row className="margin-top-btm-md">
-                                    <Col md={2} className="word row-start">
+                                    <Col md={2} className="word ">
                                       <span>링크</span>
                                     </Col>
-                                    <Col md={10} className="row-start">
+                                    <Col md={10} className="">
                                       <a
                                         href={course.homepage}
                                         target="_blank"
@@ -556,27 +556,27 @@ export default function home (props) {
                             </Col>
                           </Row>
                           <Row className="margin-top-btm-md">
-                            <Col md={2} className="word row-start">
+                            <Col md={2} className="word ">
                               <span>기한</span>
                             </Col>
-                            <Col md={10} className="row-start">
-                              <span>{assignment.deadline}</span>
+                            <Col md={10} className="">
+                              <p>{assignment.deadline}</p>
                             </Col>
                           </Row>
                           <Row className="margin-top-btm-md">
-                            <Col md={2} className="word row-start">
+                            <Col md={2} className="word ">
                               <span>중요</span>
                             </Col>
-                            <Col md={10} className="row-start">
-                              <span>{assignment.note}</span>
+                            <Col md={10} className="">
+                              <p>{assignment.note}</p>
                             </Col>
                           </Row>
                           <Row className="margin-top-btm-md">
-                            <Col md={2} className="word row-start">
+                            <Col md={2} className="word ">
                               <span>내용</span>
                             </Col>
-                            <Col md={10} className="row-start">
-                              <span>{assignment.text}</span>
+                            <Col md={10} className="">
+                              <p>{assignment.text}</p>
                             </Col>
                           </Row>
                         </div>

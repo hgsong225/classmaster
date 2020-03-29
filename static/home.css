@@ -136,11 +136,3 @@
 .complete:hover {
     font-weight: 600;
 }
-
-.course-readonly {
-    display: block;
-}
-
-.course-editable {
-    /* display: none; */
-}
