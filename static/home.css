@@ -75,20 +75,15 @@
 .fa-ellipsis-h, .tool-box {
     cursor: pointer;
     color: grey;
-    margin-top: 0.5rem;
-}
-
-.fa-ellipsis-h:hover, .tool:hover {
-    color: #1a73e8;
 }
 
 .tool-box {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    font-size: 14px;
 }
 
 .tool {
+    font-size: 14px;
     margin-right: 1rem;
     cursor: pointer;
     color: grey;
@@ -129,10 +124,21 @@
     display: none;
 }
 
+.add {
+    color: #1a73e8;
+}
+.edit {
+    color: #1a73e8;
+}
+
 .complete {
     color: #1a73e8;
 }
 
-.complete:hover {
+.delete {
+    color: #e91e63;
+}
+
+.tool:hover, .delete:hover, .complete:hover, .edit:hover {
     font-weight: 600;
 }

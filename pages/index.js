@@ -392,7 +392,7 @@ export default function home (props) {
               <Col md={4} className="left-bar">
                 <ul className="list-unstyled">
                   <li className="tool-box">
-                    <span className="tool course-add" onClick={handleShowCourse}>강의 추가</span>
+                    <span className="tool course-add add" onClick={handleShowCourse}>강의 추가</span>
                     <span className="tool course-setting" onClick={handleCourseDelete}>관리</span>
                   </li>
                   {
@@ -411,7 +411,7 @@ export default function home (props) {
                                       <p className="pointer" name={course.class_name} id={course.class_id} value={classes[0]} onClick={selectCourse}>
                                         <strong>{course.class_name}</strong>
                                       </p>
-                                      <p id={course.class_id} className="course-delete" onClick={deleteCourse}>삭제</p>
+                                      <p id={course.class_id} className="course-delete delete" onClick={deleteCourse}>삭제</p>
                                     </div>
                                   </li>
                                 )
@@ -422,7 +422,7 @@ export default function home (props) {
                                       <p className="pointer" name={course.class_name} id={course.class_id} value={classes[0]} onClick={selectCourse}>
                                         {course.class_name}
                                       </p>
-                                      <p id={course.class_id} className="course-delete" onClick={deleteCourse}>삭제</p>
+                                      <p id={course.class_id} className="course-delete delete" onClick={deleteCourse}>삭제</p>
                                     </div>
                                   </li>
                                 )
@@ -520,7 +520,7 @@ export default function home (props) {
                       </Col>
                       <Col sm={12} className="tool-box row-start">
                         <div className="tool course-edit-cancel" value="cancel" onClick={handleCourseEditCancel}><span>취소</span></div>
-                        <div className="tool course-edit" value="edit" onClick={handleCourseEdit}><span>수정</span></div>
+                        <div className="tool course-edit edit" value="edit" onClick={handleCourseEdit}><span>수정</span></div>
                       </Col>
                     </Row>
                     {
@@ -608,7 +608,7 @@ export default function home (props) {
                           <div className="h3">과제</div>
                       </Col>
                       <Col sm={12} className="tool-box row-start">
-                        <div className="tool" onClick={handleShowAssignment}><span>추가</span></div>
+                        <div className="tool" onClick={handleShowAssignment}><span className="add">추가</span></div>
                         <div className="tool" id="select-assignment-manage" onClick={handleShowAssignmentManage}><span>선택</span></div>
                         <div className="tool" id="select-assignment-complete" onClick={handleCloseAssignmentManage}><span>완료</span></div>
                       </Col>
@@ -630,10 +630,10 @@ export default function home (props) {
                             </Col>
                             <Col md={12} className="row-start">
                               <div className="assignment-edit tool">
-                                <span id={assignment.id} onClick={handleShowAssignmentEdit}>수정</span>
+                                <span id={assignment.id} className="edit" onClick={handleShowAssignmentEdit}>수정</span>
                               </div>
                               <div className="assignment-delete tool">
-                                <span id={assignment.id} onClick={deleteAssignment}>삭제</span>
+                                <span id={assignment.id} className="delete" onClick={deleteAssignment}>삭제</span>
                               </div>
                             </Col>
                           </Row>
