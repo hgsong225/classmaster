@@ -16,6 +16,7 @@ const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 
 /* Components */
 import NavigationBar from '../components/NavigationBar'
+import Modal_CourseEdit from '../components/Modal_CourseEdit'
 
 /* Styles */
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -388,7 +389,7 @@ export default function home (props) {
 
                       <Form.Group as={Row} controlId="formPlaintext">
                         <Form.Label column sm="2">
-                          과목명
+                          강의명
                         </Form.Label>
                         <Col sm="10">
                           <Form.Control name="class_name" placeholder="경영학원론" onChange={handleChange} />
@@ -445,7 +446,7 @@ export default function home (props) {
               </Col>
               <Col md={8} className="row-centering" id="right-view-alt">
                 <Row>
-                  <p>과목을 선택하세요.</p>
+                  <p>강의를 선택하세요.</p>
                 </Row>
               </Col>
               <Col md={8} className="right-view" id="right-view">
@@ -530,6 +531,13 @@ export default function home (props) {
                       })
                     }
                   </Col>
+                  <Modal_CourseEdit
+                    selectedCourse={selectedCourse}
+                    showCourseEdit={showCourseEdit}
+                    handleCourseEdit={handleCourseEdit}
+                    handleChange={handleChange}
+                    updateCourse={updateCourse}
+                  />
                 </Row>
                 <Row className="assignment-container">
                   <Col sm={12}>
