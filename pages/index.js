@@ -655,7 +655,7 @@ export default function home (props) {
 
         <footer>
           <a
-            href=""
+            href="https://bit.ly/3aSqzQw"
             target="_blank"
             rel="noopener noreferrer"
             >
