@@ -88,11 +88,19 @@ export default function home (props) {
     if (showCourseEdit) setWillUpdateCourse(Object.assign(willUpdateCourse, newData))
   }
 
-  const handleShowCourse = () => setShowCourse(true)
+  const handleShowCourse = () => {
+    setShowCourse(true)
+    setShowCourseDelete(false)
+    setShowCourseEdit(false)
+    setShowAssignment(false)
+    setShowAssignmentEdit(false)
+    handleCloseAssignmentManage()
+  }
   const handleCloseCourse = () => setShowCourse(false)
   const handleCourseEdit = () => {
     if (showCourseEdit === false) {
       setShowCourseEdit(true)
+      setShowCourseDelete(false)
       setShowAssignmentManage(false)
     }
     if (showCourseEdit === true) setShowCourseEdit(false)
@@ -123,10 +131,15 @@ export default function home (props) {
   const handleShowAssignment = () => {
     setShowAssignment(true)
     handleCloseAssignmentManage()
+    setShowCourseDelete(false)
   }
   const handleCloseAssignment = () => setShowAssignment(false)
   const handleShowAssignmentManage = () => {
     setShowAssignmentManage(true)
+    setShowCourse(false)
+    setShowCourseDelete(false)
+    setShowCourseEdit(false)
+    setShowAssignment(false)
 
     /* 과제 수정 열기 */
     let assignment_edits = document.getElementsByClassName("assignment-edit");
@@ -174,6 +187,10 @@ export default function home (props) {
     let id = evt.target.id
     console.log(id)
     setShowAssignmentEdit(true)
+    setShowCourse(false)
+    setShowCourseDelete(false)
+    setShowCourseEdit(false)
+    setShowAssignment(false)
     setSelectedAssignmentId(id)
     
     let selectedAssignment = assignments.filter(assignment => id === assignment.id)[0]
@@ -260,8 +277,18 @@ export default function home (props) {
       course_edit[0].style.display = 'block'
     }
 
+    let course_setting = document.getElementsByClassName("course-setting");
+    if (showCourseDelete === false) {
+      course_setting[0].className = course_setting[0].className.replace(" active", "");
+  
+      let course_deletes = document.getElementsByClassName("course-delete");
+      Array.prototype.forEach.call(course_deletes, element => {
+        element.style.display = "none"
+      })
+    }
+
     fetchData();
-  }, [selectedCourseId, showCourseEdit])
+  }, [selectedCourseId, showCourseEdit, showCourseDelete])
 
   const selectCourse = (evt) => {
     evt.preventDefault();
@@ -285,6 +312,7 @@ export default function home (props) {
     setSemester(value)
     handleCloseAssignmentManage()
     setShowCourseEdit(false)
+    setShowCourseDelete(false)
   }
 
   const addCourse = () => {
