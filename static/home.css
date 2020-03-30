@@ -94,7 +94,7 @@
     color: grey;
 }
 
-.assignment-delete {
+.assignment-edit, .assignment-delete {
     display: none;
 }
 
@@ -102,7 +102,7 @@
     color: #e91e63;
 }
 
-#assignment-complete {
+#select-assignment-complete {
     display: none;
 }
 

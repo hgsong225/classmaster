@@ -17,6 +17,7 @@ const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 /* Components */
 import NavigationBar from '../components/NavigationBar'
 import Modal_CourseEdit from '../components/Modal_CourseEdit'
+import Modal_AssignmentEdit from '../components/Modal_AssignmentEdit'
 
 /* Styles */
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -35,8 +36,17 @@ export default function home (props) {
   const [ assignments, setAssignment ] = useState({})
 
   const [ showCourse, setShowCourse ] = useState(false)
+    const [ courseInformation, setCourseInformation ] = useState({
+      class_name: '',
+      day: '',
+      email: '',
+      homepage: '',
+      professor: '',
+      semester: '2020-1',
+      uuid: '',
+    })
   const [ showCourseEdit, setShowCourseEdit ] = useState(false)
-  const [ willUpdateCourse, setEditCourse ] = useState({
+  const [ willUpdateCourse, setWillUpdateCourse ] = useState({
     class_name: '',
     day: '',
     email: '',
@@ -47,27 +57,44 @@ export default function home (props) {
   const [ showCourseDelete, setShowCourseDelete ] = useState(false)
   
   const [ showAssignment, setShowAssignment ] = useState(false)
-  const [ showAssignmentEdit, setShowAssignmentEdit ] = useState(false)
-  const [ courseInformation, setCourseInformation ] = useState({
-    class_name: '',
-    day: '',
-    email: '',
-    homepage: '',
-    professor: '',
-    semester: '2020-1',
-    uuid: '',
-  })
   const [ assignmentInformation, setAssignmentInformation ] = useState({
     deadline: null,
     note: null,
     text: null,
-    weeks: 1,
+    weeks: null,
   })
+  const [ showAssignmentManage, setShowAssignmentManage ] = useState(false)
+  const [ showAssignmentEdit, setShowAssignmentEdit ] = useState(false)
+  const [ selectedAssignmentId, setSelectedAssignmentId ] = useState(null)
+  const [ willUpdateAssignment, setWillUpdateAssignment ] = useState({
+    deadline: null,
+    note: null,
+    text: null,
+    weeks: null,
+  })
+
+  const handleChange = evt => {
+    const formName = evt.target.name;
+    const value = evt.target.value;
+
+    let newData = {
+      [formName]: value,
+    };
+
+    console.log(newData);
+    if (showCourse) setCourseInformation(Object.assign(courseInformation, newData))
+    if (showAssignment) setAssignmentInformation(Object.assign(assignmentInformation, newData))
+    if (showAssignmentEdit) setWillUpdateAssignment(Object.assign(willUpdateAssignment, newData))
+    if (showCourseEdit) setWillUpdateCourse(Object.assign(willUpdateCourse, newData))
+  }
 
   const handleShowCourse = () => setShowCourse(true)
   const handleCloseCourse = () => setShowCourse(false)
   const handleCourseEdit = () => {
-    if (showCourseEdit === false) setShowCourseEdit(true)
+    if (showCourseEdit === false) {
+      setShowCourseEdit(true)
+      setShowAssignmentManage(false)
+    }
     if (showCourseEdit === true) setShowCourseEdit(false)
   }
   const handleCourseEditCancel = () => setShowCourseEdit(false)
@@ -93,45 +120,74 @@ export default function home (props) {
     }
   }
   
-  const handleShowAssignment = () => setShowAssignment(true)
+  const handleShowAssignment = () => {
+    setShowAssignment(true)
+    handleCloseAssignmentManage()
+  }
   const handleCloseAssignment = () => setShowAssignment(false)
-  const handleShowAssignmentEdit = () => {
-    setShowAssignmentEdit(true)
+  const handleShowAssignmentManage = () => {
+    setShowAssignmentManage(true)
+
+    /* 과제 수정 열기 */
+    let assignment_edits = document.getElementsByClassName("assignment-edit");
+    Array.prototype.forEach.call(assignment_edits, element => {
+      element.style.display = "block"
+    })
+    
+    /* 과제 삭제 열기 */
     let assignment_deletes = document.getElementsByClassName("assignment-delete");
     Array.prototype.forEach.call(assignment_deletes, element => {
       element.style.display = "block"
     })
-    let edit_button = document.getElementById("assignment-edit")
+
+    /* 완료 버튼 열고 선택 버튼 닫기 */
+    let edit_button = document.getElementById("select-assignment-manage")
     edit_button.style.display = "none"
     
-    let complete_button = document.getElementById("assignment-complete")
+    let complete_button = document.getElementById("select-assignment-complete")
     complete_button.style.display = "block"
   }
-  const handleCloseAssignmentEdit = () => {
-    setShowAssignmentEdit(false)
+  const handleCloseAssignmentManage = () => {
+    setShowAssignmentManage(false)
+
+    /* 과제 수정 닫기 */
+    let assignment_edits = document.getElementsByClassName("assignment-edit");
+    Array.prototype.forEach.call(assignment_edits, element => {
+      element.style.display = "none"
+    })
+    
+    /* 과제 삭제 닫기 */
     let assignment_deletes = document.getElementsByClassName("assignment-delete");
     Array.prototype.forEach.call(assignment_deletes, element => {
       element.style.display = "none"
     })
-    let edit_button = document.getElementById("assignment-edit")
+
+    /* 완료 버튼 닫고 선택 버튼 열기 */
+    let edit_button = document.getElementById("select-assignment-manage")
     edit_button.style.display = "block"
-    
-    let complete_button = document.getElementById("assignment-complete")
+  
+    let complete_button = document.getElementById("select-assignment-complete")
     complete_button.style.display = "none"
   }
 
-  const deleteCourse = (evt) => {
-    evt.preventDefault();
-    let course_id = evt.target.id;
-    db.collection('class').doc(`${course_id}`)
-    .delete()
+  const handleShowAssignmentEdit = (evt) => {
+    let id = evt.target.id
+    console.log(id)
+    setShowAssignmentEdit(true)
+    setSelectedAssignmentId(id)
+    
+    let selectedAssignment = assignments.filter(assignment => id === assignment.id)[0]
+    setWillUpdateAssignment(selectedAssignment)
   }
 
-  const deleteAssignment = (evt) => {
-    evt.preventDefault();
-    const selectedAssignmentId = evt.target.id
-    db.collection('class').doc(`${selectedCourseId}`).collection('assignment').doc(`${selectedAssignmentId}`)
-    .delete()
+  const handleCloseAssignmentEdit = () => {
+    setShowAssignmentEdit(false)
+    setWillUpdateAssignment({
+      deadline: null,
+      note: null,
+      text: null,
+      weeks: null,
+    })
   }
 
   useEffect(() => {
@@ -177,12 +233,10 @@ export default function home (props) {
           setCourses(resultArr);
         })
 
-
       await db.collection('class').doc(`${selectedCourseId}`).collection('assignment').orderBy('weeks', 'desc')
       .onSnapshot(async data => {
         setAssignment(data.docs.map(doc => ({ ...doc.data(), id: doc.id })))
       })
-
 
     }
     let right_view_alt = document.getElementById("right-view-alt");
@@ -205,7 +259,7 @@ export default function home (props) {
       course_edit_cancel[0].style.display = 'none'
       course_edit[0].style.display = 'block'
     }
-    
+
     fetchData();
   }, [selectedCourseId, showCourseEdit])
 
@@ -222,29 +276,15 @@ export default function home (props) {
           class_id: doc.id,
         }, doc.data()))
         
-        await setEditCourse(Object.assign({
+        await setWillUpdateCourse(Object.assign({
           class_id: doc.id,
         }, doc.data()))
       })
 
     setSelectCourseId(id)
     setSemester(value)
-    handleCloseAssignmentEdit(false)
+    handleCloseAssignmentManage()
     setShowCourseEdit(false)
-  }
-
-  const handleChange = evt => {
-    const formName = evt.target.name;
-    const value = evt.target.value;
-
-    let newData = {
-      [formName]: value,
-    };
-
-    console.log(newData);
-    if (showCourseEdit) setEditCourse(Object.assign(willUpdateCourse, newData))
-    if (showCourse) setCourseInformation(Object.assign(courseInformation, newData))
-    if (showAssignment) setAssignmentInformation(Object.assign(assignmentInformation, newData))
   }
 
   const addCourse = () => {
@@ -288,9 +328,31 @@ export default function home (props) {
   }
 
   const updateAssignment = () => {
-    db.collection('class').doc(`${selectedCourseId}`).collection('assignment').doc('과제 id')
-    .update(willUpdateCourse)
-    .then(res => setShowCourseEdit(false))
+    db.collection('class').doc(`${selectedCourseId}`).collection('assignment').doc(`${selectedAssignmentId}`)
+    .update(willUpdateAssignment)
+    .then(res => {
+      setShowAssignmentEdit(false)
+      setWillUpdateAssignment({
+        deadline: null,
+        note: null,
+        text: null,
+        weeks: 1,
+      })
+    })
+  }
+
+  const deleteCourse = (evt) => {
+    evt.preventDefault();
+    let course_id = evt.target.id;
+    db.collection('class').doc(`${course_id}`)
+    .delete()
+  }
+
+  const deleteAssignment = (evt) => {
+    evt.preventDefault();
+    const selectedAssignmentId = evt.target.id
+    db.collection('class').doc(`${selectedCourseId}`).collection('assignment').doc(`${selectedAssignmentId}`)
+    .delete()
   }
 
   const createOptions = () => {
@@ -547,16 +609,29 @@ export default function home (props) {
                       </Col>
                       <Col sm={12} className="tool-box row-start">
                         <div className="tool" onClick={handleShowAssignment}><span>추가</span></div>
-                        <div className="tool" id="assignment-edit" onClick={handleShowAssignmentEdit}><span>선택</span></div>
-                        <div className="tool" id="assignment-complete" onClick={handleCloseAssignmentEdit}><span>완료</span></div>
+                        <div className="tool" id="select-assignment-manage" onClick={handleShowAssignmentManage}><span>선택</span></div>
+                        <div className="tool" id="select-assignment-complete" onClick={handleCloseAssignmentManage}><span>완료</span></div>
                       </Col>
                     </Row>
+                    <Modal_AssignmentEdit
+                      willUpdateAssignment={willUpdateAssignment}
+                      showAssignmentEdit={showAssignmentEdit}
+                      handleCloseAssignmentEdit={handleCloseAssignmentEdit}
+                      handleChange={handleChange}
+                      updateAssignment={updateAssignment}
+                      createOptions={createOptions}
+                    />
                     {
                       assignments.length && assignments.map(assignment => (
                         <div className="detail-box margin-top-btm-lg">
                           <Row>
                             <Col md={12}>
                               <div className="h4">{assignment.weeks}주차</div>
+                            </Col>
+                            <Col md={12} className="row-start">
+                              <div className="assignment-edit tool">
+                                <span id={assignment.id} onClick={handleShowAssignmentEdit}>수정</span>
+                              </div>
                               <div className="assignment-delete tool">
                                 <span id={assignment.id} onClick={deleteAssignment}>삭제</span>
                               </div>
