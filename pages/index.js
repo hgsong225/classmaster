@@ -241,7 +241,6 @@ export default function home (props) {
     };
 
     console.log(newData);
-    setValue(value);
     if (showCourseEdit) setEditCourse(Object.assign(willUpdateCourse, newData))
     if (showCourse) setCourseInformation(Object.assign(courseInformation, newData))
     if (showAssignment) setAssignmentInformation(Object.assign(assignmentInformation, newData))
