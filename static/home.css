@@ -128,6 +128,14 @@
     display: none;
 }
 
+.blue {
+    color: #1a73e8;
+}
+
+.strong {
+    font-weight: 600;
+}
+
 .add {
     color: #1a73e8;
 }
@@ -145,4 +153,12 @@
 
 .tool:hover, .delete:hover, .complete:hover, .edit:hover {
     font-weight: 600;
+}
+
+.main-description {
+    font-size: 24px;
+}
+
+.sub-description {
+    font-size: 14px;
 }

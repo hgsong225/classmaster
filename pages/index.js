@@ -549,7 +549,11 @@ export default function home (props) {
               </Col>
               <Col md={8} className="row-centering" id="right-view-alt">
                 <Row className="non-selected-right-view col-centering">
-                  <p>강의를 선택하거나 추가하세요.</p>
+                  <p className="main-description">강의를 선택하거나 추가하세요.</p>
+                  {
+                    !user.uuid &&
+                    <p className="sub-description" onClick={handleSignIn}>지금 <span className="blue strong pointer">로그인</span>하고 흩어진 강의를 간편하게 정리하세요!</p>
+                  }
                 </Row>
               </Col>
               <Col md={8} className="right-view" id="right-view">
