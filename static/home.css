@@ -20,7 +20,9 @@
 }
 
 .non-selected-right-view {
+    width: 100%;
     min-height: 50vh;
+    margin: 0;
 }
 
 .course-container, .assignment-container {
@@ -126,14 +128,6 @@
 
 .course-edit-cancel {
     display: none;
-}
-
-.blue {
-    color: #1a73e8;
-}
-
-.strong {
-    font-weight: 600;
 }
 
 .add {

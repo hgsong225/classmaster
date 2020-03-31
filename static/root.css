@@ -54,7 +54,7 @@ body {
 }
 
 .margin-top-md {
-    margin: 1rem;
+    margin-top: 1rem;
 }
 
 .margin-btm-md {
@@ -116,4 +116,12 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+}
+
+.blue {
+    color: #1a73e8;
+}
+
+.strong {
+    font-weight: 600;
 }

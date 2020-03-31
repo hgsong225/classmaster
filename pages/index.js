@@ -549,11 +549,30 @@ export default function home (props) {
               </Col>
               <Col md={8} className="row-centering" id="right-view-alt">
                 <Row className="non-selected-right-view col-centering">
-                  <p className="main-description">강의를 선택하거나 추가하세요.</p>
-                  {
-                    !user.uuid &&
-                    <p className="sub-description" onClick={handleSignIn}>지금 <span className="blue strong pointer">로그인</span>하고 흩어진 강의를 간편하게 정리하세요!</p>
-                  }
+                  <Col md={12} className="col-centering margin-btm-md">
+                    <span className="main-description">강의를 선택하거나 추가하세요.</span>
+                  </Col>
+                  <Col md={12} className="col-centering margin-btm-md">
+                    {
+                      !user.uuid &&
+                      <span className="sub-description" onClick={handleSignIn}>지금 <span className="blue strong pointer">로그인</span>하고 흩어진 강의를 간편하게 정리하세요!</span>
+                    }
+                  </Col>
+                  <Col md={12} className="col-centering margin-btm-md">
+                    {
+                      !user.uuid &&
+                      <span className="sub-description">로그인을 했는데 접속이 안될 경우
+                          <Link
+                              href=
+                              {
+                                  `${router.pathname}`
+                              }
+                          >
+                            <a className="strong pointer"> 여기</a>
+                          </Link>
+                      를 눌러주세요.</span>
+                    }
+                  </Col>
                 </Row>
               </Col>
               <Col md={8} className="right-view" id="right-view">
