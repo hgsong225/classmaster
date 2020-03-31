@@ -216,7 +216,7 @@ export default function home (props) {
 
   useEffect(() => {
     async function fetchData() {
-        await db.collection('class').where('uuid', '==', `${user.uuid}`).orderBy('class_name', 'asc')
+        await db.collection('class').where('uuid', '==', user.uuid).orderBy('class_name', 'asc')
         .onSnapshot(async docs => {
           let data = [];
           await docs.forEach(doc => {
