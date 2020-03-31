@@ -48,14 +48,14 @@ export default function NavigationBar (props) {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        {/* <Nav.Link href="#features">Features</Nav.Link> */}
+                        {/* <Nav.Link href="#pricing">Pricing</Nav.Link> */}
                     </Nav>
                     <Nav>
                         {
                             user
-                            ? <span onClick={handleSignOut}>Sign-Out</span>
-                            : <span onClick={handleSignIn}>Sign-In</span>
+                            ? <Nav.Link onClick={handleSignOut}>로그아웃</Nav.Link>
+                            : <Nav.Link onClick={handleSignIn}>로그인</Nav.Link>
                         }
                     </Nav>
                 </Navbar.Collapse>
