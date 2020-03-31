@@ -16,6 +16,21 @@ import '../static/root.css'
 import '../static/navbar.css'
 
 export default function NavigationBar (props) {
+    const {
+        user,
+        handleSignIn,
+    } = props
+
+    const handleSignOut = () => {
+        firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+            console.log('로그아웃 성공')
+          }).catch(function(error) {
+            // An error happened.
+            console.log(error)
+          });
+    }
+
     return (
         <div>
             <Head>
@@ -33,11 +48,15 @@ export default function NavigationBar (props) {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
+                        <Nav.Link href="#features">Features</Nav.Link>
+                        <Nav.Link href="#pricing">Pricing</Nav.Link>
                     </Nav>
                     <Nav>
-                        <Link href='/' passHref>
-                            <Nav.Link></Nav.Link>
-                        </Link>
+                        {
+                            user
+                            ? <span onClick={handleSignOut}>Sign-Out</span>
+                            : <span onClick={handleSignIn}>Sign-In</span>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

@@ -14,6 +14,9 @@ import firebase from '../configure/firebase'
 const arrayRemove = firebase.firestore.FieldValue.arrayRemove;
 const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 
+/* Custom Hooks */
+
+
 /* Components */
 import NavigationBar from '../components/NavigationBar'
 import Modal_CourseEdit from '../components/Modal_CourseEdit'
@@ -27,7 +30,11 @@ import '../static/home.css'
 export default function home (props) {
   const router = useRouter();
   const db = firebase.firestore();
-  
+  const {
+    user,
+    handleSignIn,
+  } = props
+
   const [ coursesData, setCourses ] = useState([])
   const courses = coursesData;
   const [ semester, setSemester ] = useState("2020-1")
@@ -398,7 +405,10 @@ export default function home (props) {
 
   return (
     <div className="theme-background">
-      <NavigationBar />
+      <NavigationBar
+        user={user}
+        handleSignIn={handleSignIn}
+      />
       <div className="container fluid">
         <Head>
           <title>classmaster | 클래스마스터 | 사이드 프로젝트 커뮤니티 - 킥사</title>
