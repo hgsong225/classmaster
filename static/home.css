@@ -19,6 +19,10 @@
     padding: 1rem;
 }
 
+.non-selected-right-view {
+    min-height: 50vh;
+}
+
 .course-container, .assignment-container {
     background-color: #fff;
 }

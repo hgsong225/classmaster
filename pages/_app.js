@@ -8,14 +8,30 @@ import firebase from '../configure/firebase'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../static/root.css'
 
-function classmaster_App({ Component, pageProps }) {
+function classmaster_App({ Component, pageProps, userProp }) {
     const provider = new firebase.auth.GoogleAuthProvider();
-    const [ user, setUser ] = useState(null)
+    const [ user, setUser ] = useState({
+      displayName: null,
+      email: null,
+      emailVerified: null,
+      photoURL: null,
+      isAnonymous: null,
+      uuid: null,
+      providerData: null,
+    })
 
     useEffect(() => {
       async function fetchData() {
-        await firebase.auth().onAuthStateChanged((user) => {
-          let userData = {};
+        firebase.auth().onAuthStateChanged((user) => {
+          let userData = {
+            displayName: null,
+            email: null,
+            emailVerified: null,
+            photoURL: null,
+            isAnonymous: null,
+            uuid: null,
+            providerData: null,
+          };
 
           if (user) {
               // User is signed in.
@@ -34,8 +50,8 @@ function classmaster_App({ Component, pageProps }) {
               // ...
           } else {
               // User is signed out.
-              console.log(`로그아웃 상태`);
-              setUser(null);
+              console.log(`로그아웃 상태임`);
+              setUser(userData);
               // ...
           }
           // ...
@@ -62,8 +78,6 @@ function classmaster_App({ Component, pageProps }) {
               uuid: user.uid,
               providerData: user.providerData,
             };
-
-            console.log('회원가입 완료맨', user)
           
         }).catch(function(error) {
             // Handle Errors here.

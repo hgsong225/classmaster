@@ -43,15 +43,15 @@ export default function home (props) {
   const [ assignments, setAssignment ] = useState({})
 
   const [ showCourse, setShowCourse ] = useState(false)
-    const [ courseInformation, setCourseInformation ] = useState({
-      class_name: '',
-      day: '',
-      email: '',
-      homepage: '',
-      professor: '',
-      semester: '2020-1',
-      uuid: '',
-    })
+  const [ courseInformation, setCourseInformation ] = useState({
+    class_name: '',
+    day: '',
+    email: '',
+    homepage: '',
+    professor: '',
+    semester: '2020-1',
+    uuid: null,
+  })
   const [ showCourseEdit, setShowCourseEdit ] = useState(false)
   const [ willUpdateCourse, setWillUpdateCourse ] = useState({
     class_name: '',
@@ -216,7 +216,7 @@ export default function home (props) {
 
   useEffect(() => {
     async function fetchData() {
-        db.collection('class').orderBy('class_name', 'asc')
+        await db.collection('class').where('uuid', '==', `${user.uuid}`).orderBy('class_name', 'asc')
         .onSnapshot(async docs => {
           let data = [];
           await docs.forEach(doc => {
@@ -263,6 +263,9 @@ export default function home (props) {
       })
 
     }
+
+    setCourseInformation(Object.assign(courseInformation, { uuid: user.uuid }))
+
     let right_view_alt = document.getElementById("right-view-alt");
     let right_view = document.getElementById("right-view");
     if (selectedCourseId === null) {
@@ -295,7 +298,7 @@ export default function home (props) {
     }
 
     fetchData();
-  }, [selectedCourseId, showCourseEdit, showCourseDelete])
+  }, [user, selectedCourseId, showCourseEdit, showCourseDelete])
 
   const selectCourse = (evt) => {
     evt.preventDefault();
@@ -333,7 +336,7 @@ export default function home (props) {
         homepage: '',
         professor: '',
         semester: '2020-1',
-        uuid: '',
+        uuid: null,
       });
       handleCloseCourse();
       router.push('/');
@@ -545,8 +548,8 @@ export default function home (props) {
                 </Modal>
               </Col>
               <Col md={8} className="row-centering" id="right-view-alt">
-                <Row>
-                  <p>강의를 선택하세요.</p>
+                <Row className="non-selected-right-view col-centering">
+                  <p>강의를 선택하거나 추가하세요.</p>
                 </Row>
               </Col>
               <Col md={8} className="right-view" id="right-view">
@@ -832,58 +835,57 @@ export default function home (props) {
 
 
 home.getInitialProps = async ({query}) => {
-  const db = firebase.firestore();
+  // const db = firebase.firestore();
 
-  let courses = await new Promise((resolve, reject) => {
-    let data = [];
-    db.collection('class').orderBy('class_name', 'asc')
-    .get()
-    .then(async docs => {
-      await docs.forEach(doc => {
-        data.push(Object.assign({
-            class_id: doc.id,
-        }, doc.data()))
-      })
-      let result = await data.reduce((total, {
-        class_id,
-        class_name,
-        day,
-        email,
-        homepage,
-        professor,
-        semester,
-        uuid,
-        ...data
-      }) => {
-          if(!total[semester]) {
-              total[semester] = [];
-          }
+  // let courses = await new Promise((resolve, reject) => {
+  //   let data = [];
+  //   db.collection('class').orderBy('class_name', 'asc')
+  //   .get()
+  //   .then(async docs => {
+  //     await docs.forEach(doc => {
+  //       data.push(Object.assign({
+  //           class_id: doc.id,
+  //       }, doc.data()))
+  //     })
+  //     let result = await data.reduce((total, {
+  //       class_id,
+  //       class_name,
+  //       day,
+  //       email,
+  //       homepage,
+  //       professor,
+  //       semester,
+  //       uuid,
+  //       ...data
+  //     }) => {
+  //         if(!total[semester]) {
+  //             total[semester] = [];
+  //         }
 
-          total[semester].push({
-            class_id,
-            class_name,
-            day,
-            email,
-            homepage,
-            professor,
-            semester,
-            uuid,
-          })
+  //         total[semester].push({
+  //           class_id,
+  //           class_name,
+  //           day,
+  //           email,
+  //           homepage,
+  //           professor,
+  //           semester,
+  //           uuid,
+  //         })
           
-          return total;
-      }, [])
+  //         return total;
+  //     }, [])
 
-      let resultArr = Object.entries(result);
+  //     let resultArr = Object.entries(result);
 
-      resolve(resultArr);
-    })
-    .catch(err => reject([]));
-  })
+  //     resolve(resultArr);
+  //   })
+  //   .catch(err => reject([]));
+  // })
 
   return {
     data: {
-      courses,
-    }
+    },
   };
 
 }

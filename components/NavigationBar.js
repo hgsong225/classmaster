@@ -53,7 +53,7 @@ export default function NavigationBar (props) {
                     </Nav>
                     <Nav>
                         {
-                            user
+                            user.uuid
                             ? <Nav.Link onClick={handleSignOut}>로그아웃</Nav.Link>
                             : <Nav.Link onClick={handleSignIn}>로그인</Nav.Link>
                         }
