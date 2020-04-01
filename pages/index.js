@@ -548,9 +548,9 @@ export default function home (props) {
                 </Modal>
               </Col>
               <Col md={8} className="row-centering" id="right-view-alt">
-                <Row className="non-selected-right-view col-centering">
+                <Row className="non-selected-right-view col-start">
                   <Col md={8} className="col-centering margin-btm-md">
-                    <Row className="w-fluid col-start margin-btm-md padding-top-btm-md dash">
+                    <Row className="w-fluid col-start margin-unstyled margin-btm-md padding-top-btm-md dash">
                       {
                         !user.uuid &&
                         <div>
