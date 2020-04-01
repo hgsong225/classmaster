@@ -567,7 +567,7 @@ export default function home (props) {
                           </div>
                           <div className="typewriter margin-btm-lg">
                             <p className="h2">
-                              아뇨,
+                              전부,
                             </p>
                             <p className="h2">
                               클래스마스터에서
