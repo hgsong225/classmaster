@@ -8,67 +8,67 @@
 }
 
 .sub-typing p:nth-child(1) {
-    width: 12.5em;
-    -webkit-animation: type 2s steps(20, end);
+    width: 12em;
+    /* -webkit-animation: type 2s steps(20, end); */
     animation: type 2s steps(20, end);
-    -webkit-animation-fill-mode: forwards;
+    /* -webkit-animation-fill-mode: forwards; */
     animation-fill-mode: forwards;
 }
 
 .sub-typing p:nth-child(2) {
     width: 9em;
     opacity: 0;
-    -webkit-animation: type2 1.5s steps(20, end);
+    /* -webkit-animation: type2 1.5s steps(20, end); */
     animation: type2 1.5s steps(20, end);
-    -webkit-animation-delay: 2s;
+    /* -webkit-animation-delay: 2s; */
     animation-delay: 2s;
-    -webkit-animation-fill-mode: forwards;
+    /* -webkit-animation-fill-mode: forwards; */
     animation-fill-mode: forwards;
 }
 
 .sub-typing p:nth-child(3) {
     width: 8em;
     opacity: 0;
-    -webkit-animation: type2 1s steps(20, end);
+    /* -webkit-animation: type2 1s steps(20, end); */
     animation: type2 1s steps(20, end);
-    -webkit-animation-delay: 3.5s;
+    /* -webkit-animation-delay: 3.5s; */
     animation-delay: 3.5s;
-    -webkit-animation-fill-mode: forwards;
+    /* -webkit-animation-fill-mode: forwards; */
     animation-fill-mode: forwards;
 
     margin-bottom: 2rem;
 }
 
 .sub-typing p:nth-child(4) {
-    width: 2em;
+    width: 2.5em;
     opacity: 0;
-    -webkit-animation: type2 0.5s steps(10, end);
+    /* -webkit-animation: type2 0.5s steps(10, end); */
     animation: type2 0.5s steps(10, end);
-    -webkit-animation-delay: 5s;
+    /* -webkit-animation-delay: 5s; */
     animation-delay: 5s;
-    -webkit-animation-fill-mode: forwards;
+    /* -webkit-animation-fill-mode: forwards; */
     animation-fill-mode: forwards;
 }
 
 .sub-typing p:nth-child(5) {
     width: 8em;
     opacity: 0;
-    -webkit-animation: type2 2s steps(20, end);
+    /* -webkit-animation: type2 2s steps(20, end); */
     animation: type2 2s steps(20, end);
-    -webkit-animation-delay: 5.5s;
+    /* -webkit-animation-delay: 5.5s; */
     animation-delay: 5.5s;
-    -webkit-animation-fill-mode: forwards;
+    /* -webkit-animation-fill-mode: forwards; */
     animation-fill-mode: forwards;
 }
 
 .sub-typing p:nth-child(6) {
     width: 7em;
     opacity: 0;
-    -webkit-animation: type3 1.5s steps(20, end), blink .5s step-end infinite alternate;
+    /* -webkit-animation: type3 1.5s steps(20, end), blink .5s step-end infinite alternate; */
     animation: type3 1.5s steps(20, end), blink .5s step-end infinite alternate;
-    -webkit-animation-delay: 7.5s;
+    /* -webkit-animation-delay: 7.5s; */
     animation-delay: 7.5s;
-    -webkit-animation-fill-mode: forwards;
+    /* -webkit-animation-fill-mode: forwards; */
     animation-fill-mode: forwards;
 }
 @keyframes type {
@@ -85,7 +85,7 @@
         border: none;
     }
 }
-@-webkit-keyframes type {
+/* @-webkit-keyframes type {
     0% {
         width: 0;
     }
@@ -96,9 +96,9 @@
         border-right: .15em solid #000;
     }
     100% {
-        border: none;
-    }
-}
+        border: none; */
+    /* }
+} */
 @keyframes type2 {
     0% {
         width: 0;
@@ -114,7 +114,7 @@
         border: none;
     }
 }
-@-webkit-keyframes type2 {
+/* @-webkit-keyframes type2 {
     0% {
        width: 0;
     }
@@ -128,7 +128,7 @@
         opacity: 1;
         border: none;
     }
-}
+} */
 @keyframes type3 {
     0% {
       width: 0;
@@ -141,7 +141,7 @@
       border-right: .15em solid #000;
     }
 }
-@-webkit-keyframes type3 {
+/* @-webkit-keyframes type3 {
     0% {
       width: 0;
     }
@@ -150,8 +150,9 @@
     }
     100% {
        opacity: 1;
+       border-right: .15em solid #000;
     }
-}
+} */
 @keyframes blink {
     50% {
         border-color: transparent;
@@ -159,6 +160,10 @@
 }
 @-webkit-keyframes blink {
     50% {
-        border-color: tranparent;
+        border-color: transparent;
     }
+}
+
+@media screen and (max-width: 1200px) {
+  html { font-size: 16px; }
 }
