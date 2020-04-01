@@ -51,6 +51,10 @@
     border-bottom: 1px solid #ececec;
 }
 
+.dash-strong {
+    border-bottom: 1px solid #dadce0;
+}
+
 .detail-box {
     margin-top: 1rem;
     border-bottom: 1px solid #ececec;
@@ -150,9 +154,13 @@
 }
 
 .main-description {
-    font-size: 24px;
+    font-size: 1.2rem;
+}
+
+.sub-description-conatiner {
+    width: 100%;
 }
 
 .sub-description {
-    font-size: 14px;
+    font-size: .8rem;
 }

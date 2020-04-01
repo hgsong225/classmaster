@@ -61,6 +61,36 @@ body {
     margin-bottom: 1rem;
 }
 
+.padding-unstyled {
+    padding: 0;
+}
+
+.padding-top-btm-lg {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.padding-top-lg {
+    padding-top: 2rem;
+}
+
+.padding-btm-lg {
+    padding-bottom: 2rem;
+}
+
+.padding-top-btm-md {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.padding-top-md {
+    padding-top: 1rem;
+}
+
+.padding-btm-md {
+    padding-bottom: 1rem;
+}
+
 /* flex box */
 .row-start {
     display: flex;
@@ -120,6 +150,10 @@ body {
 
 .blue {
     color: #1a73e8;
+}
+
+.warning {
+    color: #e91e63;
 }
 
 .strong {

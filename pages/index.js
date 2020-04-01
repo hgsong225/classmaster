@@ -549,28 +549,60 @@ export default function home (props) {
               </Col>
               <Col md={8} className="row-centering" id="right-view-alt">
                 <Row className="non-selected-right-view col-centering">
-                  <Col md={12} className="col-centering margin-btm-md">
-                    <span className="main-description">강의를 선택하거나 추가하세요.</span>
-                  </Col>
-                  <Col md={12} className="col-centering margin-btm-md">
+                  <Col md={8} className="col-centering margin-btm-md">
+                    <Row className="w-fluid col-start margin-btm-md padding-top-btm-md dash">
+                      {
+                        !user.uuid &&
+                        <div>
+                          <div className="">
+                            <p className="h6">
+                              <strong>이번 주 수업 과제</strong>가 뭐였지?
+                            </p>
+                            <p className="h6">
+                              <strong>언제까지 </strong>내야하지?
+                            </p>
+                            <p className="h6">
+                              <strong>손으로 </strong>써야하나?
+                            </p>
+                          </div>
+                          <div className="typewriter">
+                            <p className="h1">
+                              클래스마스터에서
+                            </p>
+                            <p className="h1">한 눈에.</p>
+                          </div>
+                        </div>
+                      }
+                      {
+                        user.uuid &&
+                          <p className="">강의를 선택하거나 추가하세요.</p>
+                      }
+                      <Button onClick={handleShowCourse}>강의 추가</Button>
+                    </Row>
                     {
                       !user.uuid &&
-                      <span className="sub-description" onClick={handleSignIn}>지금 <span className="blue strong pointer">로그인</span>하고 흩어진 강의를 간편하게 정리하세요!</span>
-                    }
-                  </Col>
-                  <Col md={12} className="col-centering margin-btm-md">
-                    {
-                      !user.uuid &&
-                      <span className="sub-description">로그인을 했는데 접속이 안될 경우
-                          <Link
-                              href=
-                              {
-                                  `${router.pathname}`
-                              }
-                          >
-                            <a className="strong pointer"> 여기</a>
-                          </Link>
-                      를 눌러주세요.</span>
+                      <div className="sub-description-conatiner">
+                        <Row className="col-start margin-unstyled margin-btm-md">
+                          <p className="sub-description" onClick={handleSignIn}>지금 <span className="blue strong pointer">로그인</span>하고 흩어진 강의를 간편하게 저장하고 관리하세요!</p>
+                          <p className="sub-description">로그인이 제대로 안될 경우
+                              <Link
+                                  href=
+                                  {
+                                    `${router.pathname}`
+                                  }
+                                  >
+                                <a className="strong pointer"> 여기</a>
+                              </Link>
+                          를 눌러주세요.</p>
+                        </Row>
+                        <Row className="col-start margin-unstyled margin-btm-md">
+                          <span className="warning">
+                            카카오톡 내 웹브라우저는 구글 정책으로
+                            <br></br>
+                            구글 로그인 불가능합니다.
+                          </span>
+                        </Row>
+                      </div>
                     }
                   </Col>
                 </Row>
