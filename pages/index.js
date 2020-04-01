@@ -554,7 +554,7 @@ export default function home (props) {
                       {
                         !user.uuid &&
                         <div>
-                          <div className="">
+                          <div className="margin-btm-lg">
                             <p className="h6">
                               <strong>이번 주 수업 과제</strong>가 뭐였지?
                             </p>
@@ -565,11 +565,14 @@ export default function home (props) {
                               <strong>손으로 </strong>써야하나?
                             </p>
                           </div>
-                          <div className="typewriter">
-                            <p className="h1">
+                          <div className="typewriter margin-btm-lg">
+                            <p className="h2">
+                              아뇨,
+                            </p>
+                            <p className="h2">
                               클래스마스터에서
                             </p>
-                            <p className="h1">한 눈에.</p>
+                            <p className="h2">한 눈에 보세요.</p>
                           </div>
                         </div>
                       }
@@ -596,10 +599,10 @@ export default function home (props) {
                           를 눌러주세요.</p>
                         </Row>
                         <Row className="col-start margin-unstyled margin-btm-md">
-                          <span className="warning">
-                            카카오톡 내 웹브라우저는 구글 정책으로
+                          <span className="">
+                            <span className="kakaotalk strong">카카오톡</span> 내 웹브라우저는 구글 정책으로
                             <br></br>
-                            구글 로그인 불가능합니다.
+                            <span className="warning strong">구글 로그인 불가능</span>합니다. Chrome 또는 사파리 브라우저를 이용하세요.
                           </span>
                         </Row>
                       </div>
