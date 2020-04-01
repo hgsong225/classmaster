@@ -28,13 +28,13 @@ export default function NavigationBar (props) {
           }).catch(function(error) {
             // An error happened.
             console.log(error)
-          });
+        });
     }
 
     return (
         <div>
             <Head>
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="" />
                 <meta 
                     name='viewport'
                     content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
