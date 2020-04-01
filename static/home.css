@@ -26,7 +26,8 @@
 }
 
 .non-selected-right-view div{
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .course-container, .assignment-container {
