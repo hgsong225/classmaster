@@ -164,3 +164,20 @@
 .sub-description {
     font-size: .8rem;
 }
+
+
+/* 768 이상 */
+@media (min-width: 768px) {
+    .left-bar {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 4rem;
+        z-index: 1000;
+        background-color: #f7f7f7;
+    }
+}
+
+/* 767.98 이하 */
+@media (max-width: 767.98px) {
+
+}

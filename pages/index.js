@@ -430,6 +430,8 @@ export default function home (props) {
                   {moment().format('YYYY년 MMMM Do dddd')}<span style={{color: "#1a73e8"}}></span>
                 </div>
               </Col>
+            </Row>
+            <Row>
               <Col md={4} className="left-bar">
                 <ul className="list-unstyled">
                   <li className="tool-box">
