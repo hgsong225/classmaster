@@ -26,6 +26,7 @@ import Modal_AssignmentEdit from '../components/Modal_AssignmentEdit'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../static/root.css'
 import '../static/home.css'
+import '../static/typewriter.css'
 
 export default function home (props) {
   const router = useRouter();
@@ -214,6 +215,13 @@ export default function home (props) {
     })
   }
 
+
+
+
+
+
+
+  /* space for useEffect */
   useEffect(() => {
     async function fetchData() {
         await db.collection('class').where('uuid', '==', user.uuid).orderBy('class_name', 'asc')
@@ -298,7 +306,14 @@ export default function home (props) {
     }
 
     fetchData();
+
   }, [user, selectedCourseId, showCourseEdit, showCourseDelete])
+
+
+
+
+
+  /* ⬆⬆⬆ space for useEffect ⬆⬆⬆ */
 
   const selectCourse = (evt) => {
     evt.preventDefault();
@@ -406,6 +421,38 @@ export default function home (props) {
     return options;
   }
 
+  
+//   const typeWriter = () => {
+//     let i = 0;
+//     let class_collection = ['typewriter', 'sub-typing', 'main-typing']
+//     let typewriter = document.getElementsByClassName('typewriter')[0] /* The typewriter */
+//     let txt_bundle = [] /* The bundle of text */
+//     let txt =  '' /* The text */
+//     let speed = 50; /* The speed/duration of the effect in milliseconds */
+
+//     let sub_typing = typewriter.getElementsByClassName('sub-typing')[0].getElementsByTagName('p')
+//     for (i = 0; i < sub_typing.length; i += 1) {
+//       let textContent = sub_typing[i].textContent;
+//       txt_bundle.push(sub_typing[i].textContent)
+//     }
+    
+//     let main_typing = typewriter.getElementsByClassName('main-typing')[0].getElementsByTagName('p')
+//     for (i = 0; i < main_typing.length; i += 1) {
+//       let textContent = main_typing[i].textContent;
+//       txt_bundle.push(main_typing[i].textContent)
+//     }
+//     console.log(txt_bundle, i)
+
+//     txt_bundle.forEach(text => {
+//       i = 0;
+//       txt = text;
+//       // if (i < txt.length) {
+//       //   document.getElementById("demo").innerHTML += txt.charAt(i);
+//       //   setTimeout(typeWriter, speed);
+//       // }
+//     })
+// }
+
   return (
     <div className="theme-background">
       <NavigationBar
@@ -429,6 +476,9 @@ export default function home (props) {
                 <div className="h1" style={{color: "#1a73e8"}}>
                   {moment().format('YYYY년 MMMM Do dddd')}<span style={{color: "#1a73e8"}}></span>
                 </div>
+              </Col>
+              <Col md={12}>
+                <p id="demo"></p>
               </Col>
             </Row>
             <Row>
@@ -555,26 +605,28 @@ export default function home (props) {
                     <Row className="w-fluid col-start margin-unstyled margin-btm-md padding-top-btm-md dash">
                       {
                         !user.uuid &&
-                        <div>
-                          <div className="margin-btm-lg">
+                        <div className="typewriter">
+                          <div className="sub-typing margin-btm-lg h6">
                             <p className="h6">
-                              <strong>이번 주 수업 과제</strong>가 뭐였지?
+                              <strong>이번 주 수업 과제</strong> 뭐였지?
                             </p>
                             <p className="h6">
                               <strong>언제까지 </strong>내야하지?
                             </p>
                             <p className="h6">
-                              <strong>손으로 </strong>써야하나?
+                              <strong>프린트 </strong>해야하나..
                             </p>
-                          </div>
-                          <div className="typewriter margin-btm-lg">
-                            <p className="h2">
+                            <p className="h2 strong">
                               전부,
                             </p>
-                            <p className="h2">
-                              클래스마스터에서
+                            <p className="h2 strong">
+                              <span className="blue">
+                                클래스마스터에서
+                              </span>
                             </p>
-                            <p className="h2">한 눈에 보세요.</p>
+                            <p className="h2 strong">
+                              한 눈에 보세요.
+                            </p>
                           </div>
                         </div>
                       }
@@ -601,11 +653,11 @@ export default function home (props) {
                           를 눌러주세요.</p>
                         </Row>
                         <Row className="col-start margin-unstyled margin-btm-md">
-                          <span className="">
+                          <p className="">
                             <span className="kakaotalk strong">카카오톡</span> 내 웹브라우저는 구글 정책으로
                             <br></br>
                             <span className="warning strong">구글 로그인 불가능</span>합니다. Chrome 또는 사파리 브라우저를 이용하세요.
-                          </span>
+                          </p>
                         </Row>
                       </div>
                     }

@@ -25,6 +25,10 @@
     margin: 0;
 }
 
+.non-selected-right-view div{
+    padding: 0;
+}
+
 .course-container, .assignment-container {
     background-color: #fff;
 }
@@ -163,6 +167,10 @@
 
 .sub-description {
     font-size: .8rem;
+}
+
+.sub-typing, .main-typing {
+    line-height: 1.5;
 }
 
 
