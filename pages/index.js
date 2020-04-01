@@ -615,7 +615,12 @@ export default function home (props) {
                   <Col sm={12}>
                     <Row>
                       <Col sm={12} className="content-header dash">
-                        <div className="h3">강의 정보</div>
+                        <div className="h3">
+                          {
+                            // class_name
+                            courses.map(classes => classes[1].map(course => course.class_name))
+                          }
+                        </div>
                       </Col>
                       <Col sm={12} className="tool-box row-start">
                         <div className="tool course-edit-cancel" value="cancel" onClick={handleCourseEditCancel}><span>취소</span></div>
@@ -639,7 +644,7 @@ export default function home (props) {
                                   </Row>
                                   <Row className="margin-top-btm-md">
                                     <Col md={2} className="word ">
-                                      <span>강의</span>
+                                      <span>강의명</span>
                                     </Col>
                                     <Col md={10} className="course-readonly ">
                                       {course.class_name}
