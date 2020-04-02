@@ -397,9 +397,12 @@ export default function home (props) {
   const deleteCourse = (evt) => {
     evt.preventDefault();
 	let course_id = evt.target.id;
-	
-    db.collection('class').doc(`${course_id}`)
-    .delete()
+
+	let answer = confirm('정말 삭제하시겠습니까?\n해당 강의 과제도 전부 삭제됩니다.\n삭제하실 경우 되돌릴 수 없습니다.')
+	if (answer === true) {
+		db.collection('class').doc(`${course_id}`)
+		.delete()
+	}
   }
 
   const deleteAssignment = (evt) => {
