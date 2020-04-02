@@ -407,9 +407,13 @@ export default function home (props) {
 
   const deleteAssignment = (evt) => {
     evt.preventDefault();
-    const selectedAssignmentId = evt.target.id
-    db.collection('class').doc(`${selectedCourseId}`).collection('assignment').doc(`${selectedAssignmentId}`)
-    .delete()
+	const selectedAssignmentId = evt.target.id
+
+	let answer = confirm('정말 삭제하시겠습니까?\n삭제하실 경우 되돌릴 수 없습니다.')
+	if (answer === true) {
+		db.collection('class').doc(`${selectedCourseId}`).collection('assignment').doc(`${selectedAssignmentId}`)
+		.delete()
+	}
   }
 
   const createOptions = () => {
