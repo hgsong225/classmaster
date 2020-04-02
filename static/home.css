@@ -148,6 +148,7 @@
 .add {
     color: #1a73e8;
 }
+
 .edit {
     color: #1a73e8;
 }
@@ -160,7 +161,7 @@
     color: #e91e63;
 }
 
-.tool:hover, .delete:hover, .complete:hover, .edit:hover {
+.tool:hover, .delete:hover, .complete:hover, .add:hover, .edit:hover {
     font-weight: 600;
 }
 
