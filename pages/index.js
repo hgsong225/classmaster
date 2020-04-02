@@ -396,7 +396,8 @@ export default function home (props) {
 
   const deleteCourse = (evt) => {
     evt.preventDefault();
-    let course_id = evt.target.id;
+	let course_id = evt.target.id;
+	
     db.collection('class').doc(`${course_id}`)
     .delete()
   }
@@ -421,39 +422,7 @@ export default function home (props) {
     return options;
   }
 
-  
-//   const typeWriter = () => {
-//     let i = 0;
-//     let class_collection = ['typewriter', 'sub-typing', 'main-typing']
-//     let typewriter = document.getElementsByClassName('typewriter')[0] /* The typewriter */
-//     let txt_bundle = [] /* The bundle of text */
-//     let txt =  '' /* The text */
-//     let speed = 50; /* The speed/duration of the effect in milliseconds */
-
-//     let sub_typing = typewriter.getElementsByClassName('sub-typing')[0].getElementsByTagName('p')
-//     for (i = 0; i < sub_typing.length; i += 1) {
-//       let textContent = sub_typing[i].textContent;
-//       txt_bundle.push(sub_typing[i].textContent)
-//     }
-    
-//     let main_typing = typewriter.getElementsByClassName('main-typing')[0].getElementsByTagName('p')
-//     for (i = 0; i < main_typing.length; i += 1) {
-//       let textContent = main_typing[i].textContent;
-//       txt_bundle.push(main_typing[i].textContent)
-//     }
-//     console.log(txt_bundle, i)
-
-//     txt_bundle.forEach(text => {
-//       i = 0;
-//       txt = text;
-//       // if (i < txt.length) {
-//       //   document.getElementById("demo").innerHTML += txt.charAt(i);
-//       //   setTimeout(typeWriter, speed);
-//       // }
-//     })
-// }
-
-  return (
+   return (
     <div className="theme-background">
       <NavigationBar
         user={user}
