@@ -32,7 +32,8 @@ export default function home (props) {
   const router = useRouter();
   const db = firebase.firestore();
   const {
-    user,
+	user,
+	membership,
     handleSignIn,
   } = props
 
