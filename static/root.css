@@ -99,6 +99,11 @@ body {
     padding-bottom: 1rem;
 }
 
+.padding-left-right-md {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
 /* flex box */
 .row-start {
     display: flex;

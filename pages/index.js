@@ -878,7 +878,7 @@ export default function home (props) {
         </main>
 
         <footer className="">
-			<Row className="h-fluid-inherit">
+			<Row className="h-fluid-inherit padding-left-right-md">
 				<Col md={6} className="col-start">
 					<div>MVP 사이드 프로젝트 커뮤니티</div>
 					<div>
