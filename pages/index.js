@@ -778,7 +778,7 @@ export default function home (props) {
                               <span>기한</span>
                             </Col>
                             <Col md={10} className="">
-                              <p>{assignment.deadline}</p>
+                              <pre className="margin-unstyled">{assignment.deadline}</pre>
                             </Col>
                           </Row>
                           <Row className="margin-top-btm-md">
@@ -786,7 +786,7 @@ export default function home (props) {
                               <span>중요</span>
                             </Col>
                             <Col md={10} className="">
-                              <p>{assignment.note}</p>
+                              <pre className="margin-unstyled">{assignment.note}</pre>
                             </Col>
                           </Row>
                           <Row className="margin-top-btm-md">
@@ -794,7 +794,7 @@ export default function home (props) {
                               <span>내용</span>
                             </Col>
                             <Col md={10} className="">
-                              <p>{assignment.text}</p>
+                              <pre className="margin-unstyled">{assignment.text}</pre>
                             </Col>
                           </Row>
                         </div>
@@ -840,7 +840,7 @@ export default function home (props) {
                           중요
                         </Form.Label>
                         <Col sm="10">
-                          <Form.Control name="note" placeholder="교수님이 짚어주신 포인트" onChange={handleChange}/>
+                          <Form.Control as="textarea" name="note" placeholder="교수님이 짚어주신 포인트" onChange={handleChange}/>
                         </Col>
                       </Form.Group>
 
@@ -849,7 +849,7 @@ export default function home (props) {
                           과제
                         </Form.Label>
                         <Col sm="10">
-                          <Form.Control name="text" type="text" placeholder="Chapter 1~2 요약하기" onChange={handleChange}/>
+                          <Form.Control as="textarea" name="text" type="text" placeholder="Chapter 1~2 요약하기" onChange={handleChange}/>
                         </Col>
                       </Form.Group>
 
