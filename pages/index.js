@@ -606,7 +606,7 @@ export default function home (props) {
                       {
                         !user.uuid &&
                         <div className="typewriter">
-                          <div className="sub-typing margin-btm-lg h6">
+                          <div className="sub-typing margin-btm-lg">
                             <p className="h6">
                               <strong>이번 주 수업 과제</strong> 뭐였지?
                             </p>
