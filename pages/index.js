@@ -878,13 +878,23 @@ export default function home (props) {
         </main>
 
         <footer>
-          <a
-            href="https://bit.ly/3aSqzQw"
-            target="_blank"
-            rel="noopener noreferrer"
-            >
-            MVP 사이드 프로젝트 커뮤니티 - 킥보드 만드는 사람들
-          </a>
+			<Row className="w-fluid">
+				<Col md={4} className="col-centering">
+					MVP 사이드 프로젝트 커뮤니티
+				</Col>
+				<Col md={4} className="col-centering">
+					<a
+						href="https://bit.ly/3aSqzQw"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<strong>킥보드 만드는 사람들</strong>
+					</a>
+				</Col>
+				<Col md={4} className="col-centering">
+					문의: classmastersbeta@gmail.com
+				</Col>
+			</Row>
         </footer>
 
         <style jsx>{`
@@ -899,32 +909,25 @@ export default function home (props) {
 
           .pointer {
             cursor: pointer;
-        }
+		  }
 
           main {
               width: 100%;
               padding: 5rem 0;
               flex: 1;
-
           }
 
           footer {
-              width: 100%;
-              height: 100px;
-              border-top: 1px solid #eaeaea;
-              display: flex;
-              justify-content: center;
-              align-items: center;
+			  width: 100%;
+			  min-height: 140px;
+			  border-top: 1px solid #eaeaea;
+			  display: flex;
+			  justify-content: space-between;
+			  align-items: center;
           }
 
           footer img {
               margin-left: 0.5rem;
-          }
-
-          footer a {
-              display: flex;
-              justify-content: center;
-              align-items: center;
           }
 
           a {
