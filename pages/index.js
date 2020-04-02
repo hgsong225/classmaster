@@ -648,7 +648,9 @@ export default function home (props) {
                         <div className="h3">
                           {
                             // class_name
-                            courses.map(classes => classes[1].map(course => course.class_name))
+                            courses.map(classes => classes[1].map(course => {
+								if (course.class_id === selectedCourseId) return course.class_name
+							}))
                           }
                         </div>
                       </Col>
