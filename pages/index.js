@@ -71,7 +71,7 @@ export default function home (props) {
     deadline: null,
     note: null,
     text: null,
-    weeks: null,
+    weeks: 1,
   })
   const [ showAssignmentManage, setShowAssignmentManage ] = useState(false)
   const [ showAssignmentEdit, setShowAssignmentEdit ] = useState(false)
