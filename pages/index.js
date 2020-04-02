@@ -447,7 +447,7 @@ export default function home (props) {
             content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
           />
           <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap" rel="stylesheet"></link>
-		  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet"></link>
+		  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Sunflower:wght@300;500;700&display=swap" rel="stylesheet"></link>
           <script src="https://kit.fontawesome.com/8cf5b2f14d.js" crossorigin="anonymous"></script>
         </Head>
         <main>
