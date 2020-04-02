@@ -877,21 +877,21 @@ export default function home (props) {
           </Container>
         </main>
 
-        <footer>
-			<Row className="w-fluid">
-				<Col md={4} className="col-centering">
-					MVP 사이드 프로젝트 커뮤니티
+        <footer className="">
+			<Row className="h-fluid-inherit">
+				<Col md={6} className="col-start">
+					<div>MVP 사이드 프로젝트 커뮤니티</div>
+					<div>
+						<a
+							href="https://bit.ly/3aSqzQw"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<strong>킥보드 만드는 사람들</strong>
+						</a>
+					</div>
 				</Col>
-				<Col md={4} className="col-centering">
-					<a
-						href="https://bit.ly/3aSqzQw"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<strong>킥보드 만드는 사람들</strong>
-					</a>
-				</Col>
-				<Col md={4} className="col-centering">
+				<Col md={6} className="col-start-sm col-end">
 					문의: classmastersbeta@gmail.com
 				</Col>
 			</Row>
@@ -921,9 +921,6 @@ export default function home (props) {
 			  width: 100%;
 			  min-height: 140px;
 			  border-top: 1px solid #eaeaea;
-			  display: flex;
-			  justify-content: space-between;
-			  align-items: center;
           }
 
           footer img {
