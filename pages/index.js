@@ -758,7 +758,7 @@ export default function home (props) {
                       createOptions={createOptions}
                     />
                     {
-                      assignments.length && assignments.map(assignment => (
+                      assignments.length > 0 && assignments.map(assignment => (
                         <div className="detail-box margin-top-btm-lg">
                           <Row>
                             <Col md={12}>
