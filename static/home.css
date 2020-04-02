@@ -61,7 +61,6 @@
 }
 
 .detail-box {
-    margin-top: 1rem;
     border-bottom: 1px solid #ececec;
     word-wrap: break-word;
 }
@@ -73,8 +72,8 @@
 .content-header {
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-align: start;
-    align-items: flex-start;
+    -ms-flex-align: center;
+    align-items: center;
     -ms-flex-pack: justify;
     justify-content: space-between;
     border-bottom: 1px solid #dee2e6;
@@ -100,6 +99,13 @@
 .tool {
     font-size: 14px;
     margin-right: 1rem;
+    cursor: pointer;
+    color: grey;
+}
+
+.tool-last {
+    font-size: 14px;
+    margin-right: 0;
     cursor: pointer;
     color: grey;
 }

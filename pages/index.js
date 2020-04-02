@@ -41,7 +41,7 @@ export default function home (props) {
   const [ semester, setSemester ] = useState("2020-1")
   const [ selectedCourseId, setSelectCourseId ] = useState(null)
   const [ selectedCourse, setSelectCourse ] = useState({})
-  const [ assignments, setAssignment ] = useState({})
+  const [ assignments, setAssignments ] = useState({})
 
   const [ showCourse, setShowCourse ] = useState(false)
   const [ courseInformation, setCourseInformation ] = useState({
@@ -267,7 +267,7 @@ export default function home (props) {
 
       await db.collection('class').doc(`${selectedCourseId}`).collection('assignment').orderBy('weeks', 'desc')
       .onSnapshot(async data => {
-        setAssignment(data.docs.map(doc => ({ ...doc.data(), id: doc.id })))
+        setAssignments(data.docs.map(doc => ({ ...doc.data(), id: doc.id })))
       })
 
     }
@@ -644,7 +644,7 @@ export default function home (props) {
                 <Row className="course-container">
                   <Col sm={12}>
                     <Row>
-                      <Col sm={12} className="content-header dash">
+                      <Col sm={12} className="margin-unstyled padding-btm-md content-header dash">
                         <div className="h3">
                           {
                             // class_name
@@ -653,10 +653,10 @@ export default function home (props) {
 							}))
                           }
                         </div>
-                      </Col>
-                      <Col sm={12} className="tool-box row-start">
-                        <div className="tool course-edit-cancel" value="cancel" onClick={handleCourseEditCancel}><span>취소</span></div>
-                        <div className="tool course-edit edit" value="edit" onClick={handleCourseEdit}><span>수정</span></div>
+						<div className="row-start">
+							<div className="tool-last course-edit-cancel" value="cancel" onClick={handleCourseEditCancel}><span>취소</span></div>
+							<div className="tool-last course-edit edit" value="edit" onClick={handleCourseEdit}><span>수정</span></div>
+						</div>
                       </Col>
                     </Row>
                     {
@@ -740,13 +740,13 @@ export default function home (props) {
                 <Row className="assignment-container">
                   <Col sm={12}>
                     <Row>
-                      <Col sm={12} className="content-header dash">
+                      <Col sm={12} className="margin-unstyled padding-btm-md content-header dash">
                           <div className="h3">과제</div>
-                      </Col>
-                      <Col sm={12} className="tool-box row-start">
-                        <div className="tool" onClick={handleShowAssignment}><span className="add">추가</span></div>
-                        <div className="tool" id="select-assignment-manage" onClick={handleShowAssignmentManage}><span>선택</span></div>
-                        <div className="tool" id="select-assignment-complete" onClick={handleCloseAssignmentManage}><span>완료</span></div>
+						  <div className="row-start">
+							<div className="tool" onClick={handleShowAssignment}><span className="add">추가</span></div>
+							<div className="tool-last" id="select-assignment-manage" onClick={handleShowAssignmentManage}><span>선택</span></div>
+							<div className="tool-last" id="select-assignment-complete" onClick={handleCloseAssignmentManage}><span>완료</span></div>
+						  </div>
                       </Col>
                     </Row>
                     <Modal_AssignmentEdit
