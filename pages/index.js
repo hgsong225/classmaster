@@ -644,8 +644,8 @@ export default function home (props) {
                 <Row className="course-container">
                   <Col sm={12}>
                     <Row>
-                      <Col sm={12} className="margin-unstyled padding-btm-md content-header dash">
-                        <div className="h3">
+                      <Col sm={12} className="padding-btm-md content-header dash">
+                        <div className="h3 margin-unstyled">
                           {
                             // class_name
                             courses.map(classes => classes[1].map(course => {
@@ -740,8 +740,8 @@ export default function home (props) {
                 <Row className="assignment-container">
                   <Col sm={12}>
                     <Row>
-                      <Col sm={12} className="margin-unstyled padding-btm-md content-header dash">
-                          <div className="h3">과제</div>
+                      <Col sm={12} className="padding-btm-md content-header dash">
+                          <div className="h3 margin-unstyled">과제</div>
 						  <div className="row-start">
 							<div className="tool" onClick={handleShowAssignment}><span className="add">추가</span></div>
 							<div className="tool-last" id="select-assignment-manage" onClick={handleShowAssignmentManage}><span>선택</span></div>
@@ -758,7 +758,7 @@ export default function home (props) {
                       createOptions={createOptions}
                     />
                     {
-                      assignments.length > 0 && assignments.map(assignment => (
+                      assignments.length > 0 ? assignments.map(assignment => (
                         <div className="detail-box margin-top-btm-lg">
                           <Row>
                             <Col md={12}>
@@ -798,7 +798,12 @@ export default function home (props) {
                             </Col>
                           </Row>
                         </div>
-                      ))
+					  ))
+					  : <Row className="col-cetnering">
+						  <Col md={12} className="col-centering margin-top-btm-lg" style={{marginTop: "4rem"}}>
+							  <p className="add margin-unstyled pointer" onClick={handleShowAssignment}>과제 추가</p>
+						  </Col>
+					  </Row>
                     }
                   </Col>
                 </Row>
