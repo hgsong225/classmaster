@@ -37,6 +37,7 @@ export default function home (props) {
     handleSignIn,
   } = props
 
+  const [ today, setToday ] = useState(null)
   const [ coursesData, setCourses ] = useState([])
   const courses = coursesData;
   const [ semester, setSemester ] = useState("2020-1")
@@ -272,6 +273,8 @@ export default function home (props) {
       })
 
     }
+	
+	setInterval(() => { setToday(moment().format('YYYY년 MMMM Do dddd hh:mm a')) }, 1000)
 
     setCourseInformation(Object.assign(courseInformation, { uuid: user.uuid }))
 
@@ -433,7 +436,7 @@ export default function home (props) {
    return (
     <div className="theme-background">
       <NavigationBar
-        user={user}
+		user={user}
         handleSignIn={handleSignIn}
       />
       <div className="container fluid">
@@ -444,14 +447,18 @@ export default function home (props) {
             content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
           />
           <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap" rel="stylesheet"></link>
+		  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet"></link>
           <script src="https://kit.fontawesome.com/8cf5b2f14d.js" crossorigin="anonymous"></script>
         </Head>
         <main>
           <Container fluid>
             <Row>
               <Col md={12} className="today">
-                <div className="h1" style={{color: "#1a73e8"}}>
-                  {moment().format('YYYY년 MMMM Do dddd')}<span style={{color: "#1a73e8"}}></span>
+                <div className="h3">
+				  {
+					today ? today : moment().format('YYYY년 MMMM Do dddd hh:mm a')
+				  }
+				  <span style={{color: "#1a73e8"}}></span>
                 </div>
               </Col>
               <Col md={12}>
