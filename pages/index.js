@@ -878,7 +878,7 @@ export default function home (props) {
         </main>
 
         <footer className="">
-			<Row className="h-fluid-inherit padding-left-right-md">
+			<Row className="h-fluid-inherit margin-unstyled">
 				<Col md={6} className="col-start">
 					<div>MVP 사이드 프로젝트 커뮤니티</div>
 					<div>
@@ -918,7 +918,6 @@ export default function home (props) {
           }
 
           footer {
-			  width: 100%;
 			  min-height: 140px;
 			  border-top: 1px solid #eaeaea;
           }
