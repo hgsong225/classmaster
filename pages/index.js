@@ -455,10 +455,10 @@ export default function home (props) {
             <Row>
               <Col md={12} className="today">
                 <div className="h3">
-				  {
-					today ? today : moment().format('YYYY년 MMMM Do dddd hh:mm a')
-				  }
-				  <span style={{color: "#1a73e8"}}></span>
+                  {
+                  today ? today : moment().format('YYYY년 MMMM Do dddd hh:mm a')
+                  }
+                  <span style={{color: "#1a73e8"}}></span>
                 </div>
               </Col>
               <Col md={12}>
@@ -657,14 +657,14 @@ export default function home (props) {
                           {
                             // class_name
                             courses.map(classes => classes[1].map(course => {
-								if (course.class_id === selectedCourseId) return course.class_name
-							}))
+                              if (course.class_id === selectedCourseId) return course.class_name
+                            }))
                           }
                         </div>
-						<div className="row-start">
-							<div className="tool-last course-edit-cancel" value="cancel" onClick={handleCourseEditCancel}><span>취소</span></div>
-							<div className="tool-last course-edit edit" value="edit" onClick={handleCourseEdit}><span>수정</span></div>
-						</div>
+                        <div className="row-start">
+                          <div className="tool-last course-edit-cancel" value="cancel" onClick={handleCourseEditCancel}><span>취소</span></div>
+                          <div className="tool-last course-edit edit" value="edit" onClick={handleCourseEdit}><span>수정</span></div>
+                        </div>
                       </Col>
                     </Row>
                     {
@@ -750,11 +750,11 @@ export default function home (props) {
                     <Row>
                       <Col sm={12} className="padding-btm-md content-header dash">
                           <div className="h3 margin-unstyled">과제</div>
-						  <div className="row-start">
-							<div className="tool" onClick={handleShowAssignment}><span className="add">추가</span></div>
-							<div className="tool-last" id="select-assignment-manage" onClick={handleShowAssignmentManage}><span>선택</span></div>
-							<div className="tool-last" id="select-assignment-complete" onClick={handleCloseAssignmentManage}><span>완료</span></div>
-						  </div>
+                          <div className="row-start">
+                          <div className="tool" onClick={handleShowAssignment}><span className="add">추가</span></div>
+                          <div className="tool-last" id="select-assignment-manage" onClick={handleShowAssignmentManage}><span>선택</span></div>
+                          <div className="tool-last" id="select-assignment-complete" onClick={handleCloseAssignmentManage}><span>완료</span></div>
+                          </div>
                       </Col>
                     </Row>
                     <Modal_AssignmentEdit
@@ -806,12 +806,12 @@ export default function home (props) {
                             </Col>
                           </Row>
                         </div>
-					  ))
-					  : <Row className="col-cetnering">
-						  <Col md={12} className="col-centering margin-top-btm-lg" style={{marginTop: "4rem"}}>
-							  <p className="add margin-unstyled pointer" onClick={handleShowAssignment}>과제 추가</p>
-						  </Col>
-					  </Row>
+                      ))
+                      : <Row className="col-cetnering">
+                        <Col md={12} className="col-centering margin-top-btm-lg" style={{marginTop: "4rem"}}>
+                          <p className="add margin-unstyled pointer" onClick={handleShowAssignment}>과제 추가</p>
+                        </Col>
+                      </Row>
                     }
                   </Col>
                 </Row>
@@ -878,23 +878,23 @@ export default function home (props) {
         </main>
 
         <footer className="">
-			<Row className="h-fluid-inherit margin-unstyled">
-				<Col md={6} className="col-start">
-					<div>MVP 사이드 프로젝트 커뮤니티</div>
-					<div>
-						<a
-							href="https://bit.ly/3aSqzQw"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<strong>킥보드 만드는 사람들</strong>
-						</a>
-					</div>
-				</Col>
-				<Col md={6} className="col-start-sm col-end">
-					문의: classmastersbeta@gmail.com
-				</Col>
-			</Row>
+          <Row className="h-fluid-inherit margin-unstyled">
+            <Col md={6} className="col-start">
+              <div>MVP 사이드 프로젝트 커뮤니티</div>
+              <div>
+                <a
+                  href="https://bit.ly/3aSqzQw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>킥보드 만드는 사람들</strong>
+                </a>
+              </div>
+            </Col>
+            <Col md={6} className="col-start-sm col-end">
+              문의: classmastersbeta@gmail.com
+            </Col>
+          </Row>
         </footer>
 
         <style jsx>{`
