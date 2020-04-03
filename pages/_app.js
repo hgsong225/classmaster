@@ -70,15 +70,15 @@ function classmaster_App({ Component, pageProps, userProp }) {
 		});
 
 		/* get membership snapshot in real-time */
-		await db.collection('membership').where('uuid', '==', uid)
-			.onSnapshot(async data => {
-				setMembership(data.docs.map(doc => ({ ...doc.data(), id: doc.id }))[0])
+		// await db.collection('membership').where('uuid', '==', uid)
+		// 	.onSnapshot(async data => {
+		// 		setMembership(data.docs.map(doc => ({ ...doc.data(), id: doc.id }))[0])
 				
-				let hasMembership = data.docs.length > 0 ? true : false
-				if (!hasMembership && (uid !== null)) {
-					addDefaultMembership(uid)
-				}
-			})
+		// 		let hasMembership = data.docs.length > 0 ? true : false
+		// 		if (!hasMembership && (uid !== null)) {
+		// 			addDefaultMembership(uid)
+		// 		}
+		// 	})
 	  
 	}
 
