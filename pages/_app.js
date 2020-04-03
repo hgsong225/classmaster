@@ -2,6 +2,7 @@
 import App from 'next/app'
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 import firebase from '../configure/firebase'
 
@@ -9,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../static/root.css'
 
 function classmaster_App({ Component, pageProps, userProp }) {
+	const router = useRouter();
 	const db = firebase.firestore();
 	const provider = new firebase.auth.GoogleAuthProvider();
 	const [ uid, setUID ] = useState(null)
@@ -152,6 +154,7 @@ function classmaster_App({ Component, pageProps, userProp }) {
               providerData: user.providerData,
 			};
 			getMembership(userData.uuid)
+			router.push('/')
           
         }).catch(function(error) {
             // Handle Errors here.
