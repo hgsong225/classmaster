@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -16,6 +17,7 @@ import '../static/root.css'
 import '../static/navbar.css'
 
 export default function NavigationBar (props) {
+    const router = useRouter();
     const {
         user,
         handleSignIn,
@@ -25,6 +27,7 @@ export default function NavigationBar (props) {
         firebase.auth().signOut().then(function() {
             // Sign-out successful.
             console.log('로그아웃 성공')
+            router.push('/')
           }).catch(function(error) {
             // An error happened.
             console.log(error)
