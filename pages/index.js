@@ -86,12 +86,16 @@ export default function home (props) {
   const handleChange = evt => {
     const formName = evt.target.name;
     const value = evt.target.value;
+    console.log(evt.target.rows, evt.target);
+    if (evt.target.rows) {
+      evt.target.style.height = 'auto';
+      evt.target.style.height = `${evt.target.scrollHeight}px`;
+    }
 
     let newData = {
       [formName]: value,
     };
 
-    console.log(newData);
     if (showCourse) setCourseInformation(Object.assign(courseInformation, newData))
     if (showAssignment) setAssignmentInformation(Object.assign(assignmentInformation, newData))
     if (showAssignmentEdit) setWillUpdateAssignment(Object.assign(willUpdateAssignment, newData))
