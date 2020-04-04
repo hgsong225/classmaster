@@ -918,8 +918,9 @@ export default function home (props) {
           }
 
           footer {
-			  min-height: 140px;
-			  border-top: 1px solid #eaeaea;
+            width: 100%;
+            min-height: 140px;
+            border-top: 1px solid #eaeaea;
           }
 
           footer img {
