@@ -49,7 +49,7 @@ function Modal_AssignmentEdit (props) {
                         중요
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control as="textarea" name="note" placeholder="교수님이 짚어주신 포인트" defaultValue={willUpdateAssignment.note} onChange={handleChange}/>
+                        <Form.Control as="textarea" name="note" placeholder="교수님이 짚어주신 포인트" defaultValue={willUpdateAssignment.note} rows={5} onChange={handleChange}/>
                     </Col>
                     </Form.Group>
 
@@ -58,7 +58,7 @@ function Modal_AssignmentEdit (props) {
                         과제
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control as="textarea" name="text" type="text" placeholder="Chapter 1~2 요약하기" defaultValue={willUpdateAssignment.text} onChange={handleChange}/>
+                        <Form.Control as="textarea" name="text" type="text" placeholder="Chapter 1~2 요약하기" defaultValue={willUpdateAssignment.text} rows={10} onChange={handleChange}/>
                     </Col>
                     </Form.Group>
 

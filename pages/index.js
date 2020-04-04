@@ -852,7 +852,7 @@ export default function home (props) {
                           중요
                         </Form.Label>
                         <Col sm="10">
-                          <Form.Control as="textarea" name="note" placeholder="교수님이 짚어주신 포인트" onChange={handleChange}/>
+                          <Form.Control as="textarea" name="note" placeholder="교수님이 짚어주신 포인트" rows={5} onChange={handleChange}/>
                         </Col>
                       </Form.Group>
 
@@ -861,7 +861,7 @@ export default function home (props) {
                           과제
                         </Form.Label>
                         <Col sm="10">
-                          <Form.Control as="textarea" name="text" type="text" placeholder="Chapter 1~2 요약하기" onChange={handleChange}/>
+                          <Form.Control as="textarea" name="text" type="text" rows={10} placeholder="Chapter 1~2 요약하기" onChange={handleChange}/>
                         </Col>
                       </Form.Group>
 
