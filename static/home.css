@@ -38,6 +38,10 @@
     background-color: #f7f7f7
 }
 
+.notion-container {
+    padding: 2rem 1rem;
+}
+
 .course-container, .assignment-container {
     padding: 2rem 1rem;
     margin-bottom: 2rem;

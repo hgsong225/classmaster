@@ -102,7 +102,15 @@ export default function home (props) {
     if (showCourseEdit) setWillUpdateCourse(Object.assign(willUpdateCourse, newData))
   }
 
+  const alertAnonymous = () => {
+    if (!user.uuid) {
+      let msg = '로그인을 먼저 진행하세요.\n다른 유저가 강의를 볼 수 있으며 임의 수정, 삭제될 수 있습니다.'
+      alert(msg)
+    }
+  }
+
   const handleShowCourse = () => {
+    alertAnonymous()
     setShowCourse(true)
     setShowCourseDelete(false)
     setShowCourseEdit(false)
@@ -113,6 +121,7 @@ export default function home (props) {
   const handleCloseCourse = () => setShowCourse(false)
   const handleCourseEdit = () => {
     if (showCourseEdit === false) {
+      alertAnonymous()
       setShowCourseEdit(true)
       setShowCourseDelete(false)
       setShowAssignmentManage(false)
@@ -143,12 +152,14 @@ export default function home (props) {
   }
   
   const handleShowAssignment = () => {
+    alertAnonymous()
     setShowAssignment(true)
     handleCloseAssignmentManage()
     setShowCourseDelete(false)
   }
   const handleCloseAssignment = () => setShowAssignment(false)
   const handleShowAssignmentManage = () => {
+    alertAnonymous()
     setShowAssignmentManage(true)
     setShowCourse(false)
     setShowCourseDelete(false)
@@ -198,8 +209,8 @@ export default function home (props) {
   }
 
   const handleShowAssignmentEdit = (evt) => {
+    alertAnonymous()
     let id = evt.target.id
-    console.log(id)
     setShowAssignmentEdit(true)
     setShowCourse(false)
     setShowCourseDelete(false)
@@ -638,7 +649,8 @@ export default function home (props) {
                                   >
                                 <a className="strong pointer"> 여기</a>
                               </Link>
-                          를 눌러주세요.</p>
+                          를 눌러주세요.
+                          </p>
                         </Row>
                         <Row className="col-start margin-unstyled margin-btm-md">
                           <p className="">
@@ -653,6 +665,17 @@ export default function home (props) {
                 </Row>
               </Col>
               <Col md={8} className="right-view" id="right-view">
+                <Row className="notion-container">
+                  {
+                    !user.uuid &&
+                    <div>
+                      <p>
+                        <span className="warning">다른 유저가 강의를 볼 수 있으며 임의 수정, 삭제될 수 있습니다.</span>
+                      </p>
+                      <p className="sub-description" onClick={handleSignIn}>지금 <span className="blue strong pointer">로그인</span>을 먼저 진행하세요.</p>
+                    </div>
+                  }
+                  </Row>
                 <Row className="course-container">
                   <Col sm={12}>
                     <Row>
