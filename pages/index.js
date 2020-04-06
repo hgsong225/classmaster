@@ -324,6 +324,13 @@ export default function home (props) {
       })
     }
 
+    let warning_signed_out = document.getElementsByClassName("warning-signed-out")
+    if (!user.uuid) {
+      warning_signed_out[0].style.display = 'block'
+    } else {
+      warning_signed_out[0].style.display = 'none'
+    }
+
     fetchData();
 
   }, [user, selectedCourseId, showCourseEdit, showCourseDelete])
@@ -665,7 +672,7 @@ export default function home (props) {
                 </Row>
               </Col>
               <Col md={8} className="right-view" id="right-view">
-                <Row className="notion-container">
+                <Row className="warning-signed-out notion-container">
                   {
                     !user.uuid &&
                     <div>
