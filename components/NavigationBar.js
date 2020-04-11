@@ -46,7 +46,7 @@ export default function NavigationBar (props) {
             </Head>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Link href='/'>
-                    <Navbar.Brand style={{ cursor: "pointer" }}>ClassMaster beta</Navbar.Brand>
+                    <Navbar.Brand style={{ cursor: "pointer" }}>ClassMatser beta</Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
