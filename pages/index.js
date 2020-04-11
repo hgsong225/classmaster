@@ -463,7 +463,7 @@ export default function home (props) {
       />
       <div className="container fluid">
         <Head>
-          <title>classmaster | 클래스마스터 | 사이드 프로젝트 커뮤니티 - 킥사</title>
+          <title>classmatser | 클래스마스터 | 사이드 프로젝트 커뮤니티 - 킥사</title>
           <meta 
             name='viewport'
             content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
