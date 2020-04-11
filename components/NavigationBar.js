@@ -12,6 +12,10 @@ import Button from 'react-bootstrap/Button'
 /* Configures */
 import firebase from '../configure/firebase'
 
+/* Layout */
+import Meta from '../components/Meta'
+
+/* Styles */
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../static/root.css'
 import '../static/navbar.css'
@@ -36,6 +40,7 @@ export default function NavigationBar (props) {
 
     return (
         <div>
+            <Meta />
             <Head>
                 <link rel="icon" href="" />
                 <meta 
